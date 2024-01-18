@@ -324,7 +324,7 @@ npx expo prebuild --clean
 
 The `--clean` option is usefull if you make major changes (such as the target API version) and you want to make sure that old files are cleared before running the build.
 
-Now, we have to follow steps 1 & 2 from the [Expo Go 'Create your first build' guide](https://docs.expo.dev/build/setup/), so:
+Now, we have to follow steps 1 & 2 from the Expo Go 'Create your first build' guide, so:
 
 Install EAS. Despite not being stated in the official guide, we needed a sudo:
 
@@ -358,7 +358,7 @@ Alternatively, you can build & run with a single command, as explained in the 'L
 npx expo run:android
 ```
 
-You can also deploy the APK on an AVD as well. According to the [Expo Go 'Build APKs for Android Emulators and devices' guide](https://docs.expo.dev/build-reference/apk/#emulator-virtual-device), the command is:
+You can also deploy the APK on an AVD as well. According to the Expo Go 'Build APKs for Android Emulators and devices' guide, the command is:
 
 ```
 eas build:run -p android
