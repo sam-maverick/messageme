@@ -8,7 +8,7 @@ We have tested most things on a fresh install of Ubuntu Desktop 22.04.3, but you
 
 If you do not intend to use physical devices, then skip to next section.
 
-You first set up your computer to act as a WiFi access point for the phones to connect to. In our lab, the computer is connected to the Internet via an Ethernet cable. We used [create_ap](https://github.com/oblique/create_ap/) in NAT mode, so that the phones can reach the Internet without configuring any routing on the computer. Below is our template for `/etc/create_ap.conf`, which creates a hidden WiFi.
+You first set up your computer to act as a WiFi Access Point for the phones to connect to. In our lab, the computer is connected to the Internet via an Ethernet cable (interface eth0). We used [create_ap](https://github.com/oblique/create_ap/) in NAT mode, so that the phones can reach both the computer and the Internet without configuring any routing on the computer. Below is our template for `/etc/create_ap.conf`, which creates a hidden WiFi.
 
 ```
 CHANNEL=default
@@ -30,10 +30,12 @@ FREQ_BAND=2.4
 WIFI_IFACE=wlan0
 INTERNET_IFACE=eth0
 SSID=LabWifi
-PASSPHRASE=putsomepasswordhere
+PASSPHRASE=changeme
 ```
 
-To start the access point, run:
+Note that the virtual interface ap0 is created, which links to the wlan0 physical interface. Assign an IP address to ap0, within a new subnet (we used 192.168.12.1/24 in our environment).
+
+To start the Access Point, run:
 
 ```
 systemctl start create_ap
@@ -45,9 +47,29 @@ To make the service start automatically when you boot up your computer, run:
 systemctl enable create_ap
 ```
 
-Next, configure your computer to act as a DHCP server.  You will find plenty tutorials on the Internet on how to do so.
+Next, configure your computer to act as a DHCP server, for it to serve addresses within ap0's subnet. We used [dnsmasq](https://wiki.archlinux.org/title/dnsmasq). These are the main configuration options of our `/etc/dnsmasq.conf`:
 
-You should now be able to connect via WiFi from your phone. Once connected, check that you have Internet access and that you can ping the computer (you can use some app to do so).
+```
+dhcp-range=192.168.12.100,192.168.12.199,255.255.255.0,12h
+bind-interfaces
+interface=ap0
+```
+
+To start the DHCP server, run:
+
+```
+systemctl start dnsmasq
+```
+
+To make the service start automatically when you boot up your computer, run:
+
+```
+systemctl enable dnsmasq
+```
+
+*NOTE: From our experience, from looking at the [Wireshark](https://www.wireshark.org/) traces, create_ap bridges the DHCP Discover request frames received from ap0 to our eth0. If you have a DHCP server in your Ethernet network, it will offer IP addresses to the phones within the subnet range of your Ethernet. In other words, your phone will receive two DHCP Offer messages: One from the DHCP server of your computer, and one from the DHCP of your Ethernet network. Because your computer will probably reply faster, this issue will likely come unnoticed. If you run into network issues, you may want to use static IP addresses instead, or to otherwise filter the DHCP frames.*
+
+You should now be able to connect via WiFi from your phone. Once connected, check that you have Internet access and that you can ping the computer (there are many free apps to do so).
 
 Also, throughout this guide, remember to open any necessary ports of the firewall of your computer's OS, if applicable.
 
