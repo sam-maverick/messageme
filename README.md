@@ -216,7 +216,7 @@ You should get a `Nest application successfully started`.
 
 # Running the app
 
-There are different ways to deploy and launch the Messageme app. Expo Go provides a shell environment to easily and quickly test features. If you want a standalone app, then you want to deploy a bare React Native build. Besides, you may want to either use virtual or physical devices. Choose the option(s) below that you want.
+There are different ways to deploy and launch the Messageme app. Expo Go provides a shell environment to easily and quickly test features. If you want a standalone app that you can publish, then you may want to deploy a bare React Native production build. Besides, you may want to either use virtual or physical devices. Choose the option(s) below that you want.
 
 ### Launching the app on an Android device with Expo Go (managed workflow)
 
@@ -230,7 +230,7 @@ npx expo start
 
 The app UI is pretty straightforward. If you have two mobile devices, you should now be able to play sending and receiving messages over a private chat!!
 
-### Launching the app on an Android emulator
+### Launching the app on an Android emulator with Expo Go (managed workflow)
 
 Follow [this Expo Go guide for Android Studio emulator integration](https://docs.expo.dev/workflow/android-studio-emulator/).
 
@@ -369,5 +369,4 @@ It should give you a `Build successful` and a message indicating where the APK a
 Finally, if you have not already, follow the steps explained in the '<u>Install with adb</u>' section of the [Expo Go 'Build APKs for Android Emulators and devices' guide](https://docs.expo.dev/build-reference/apk/#install-with-adb). If you get a "*signatures do not match newer version; ignoring!*" error, you probably already have your app installed from a previous build. Delete the app and repeat the APK installation process.
 
 Once you have the app installed in your phone, have fun!
-
 
