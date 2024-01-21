@@ -1,8 +1,8 @@
-Welcome! This is **Messageme**, a messaging platform for mobile devices. We developed it for testing and academic purposes. It features the ability to exchange text and pictures over private chats among users. You can deploy this project on a single computer. For the client, you can use either emulators or physical devices. NOTE: If you want to run phone emulators, it is highly recommended to deploy this project on a bare metal machine, not a virtual machine.
+Welcome! This is **Messageme**, a no-frills messaging platform for mobile devices. We developed it for testing and academic purposes. It features the ability to exchange text and pictures over private chats among users. You can deploy this project on a single computer. For the client, you can use either emulators or physical devices. NOTE: If you want to run phone emulators, it is highly recommended to deploy this project on a bare metal machine, not a virtual machine.
 
 This project includes both the client and the server. The client app has been developed with [Expo Go](https://docs.expo.dev/get-started/expo-go/), based on [React Native](https://reactnative.dev/), so that you can run it on Android and iOS devices. The server has been developed with [NestJS](https://nestjs.com/) and uses a [MongoDB](https://www.mongodb.com) self-hosted database in the backend.
 
-We have tested most things on a fresh install of Ubuntu Desktop 22.04.3, but you should be able to deploy it on any platform, by following the provided reference links. The steps we suggest are meant for an isolated lab environment, meaning that it's on your responsibility to check their impact on your particular computing and networking environment.
+We have tested most things on a fresh install of Ubuntu Desktop 22.04.3, but you should be able to deploy it on any platform if you follow the provided reference links. The steps we suggest are meant for an isolated lab environment, meaning that it's on your responsibility to check their impact on your particular computing and networking environment.
 
 # Preparing the network environment
 
@@ -292,6 +292,14 @@ For any AVDs you want to use, repeat the same steps: Make sure no other AVD is r
 
 Once you have installed the Expo Go on all your AVDs, you can then start all your AVDs at once, run the Expo Go app, launch Messageme, and play with sending and receiving messages.
 
+### Launching the app on an iOS emulator with Expo Go
+
+You should not need an Apple Developer account to use an iOS emulator, but you'll need a Mac to perform this step. The command is:
+
+```
+npx expo run:ios
+```
+
 ### Deploying the APK and running the app on a physical Android device (bare React Native)
 
 Here we will deploy the app as a bare React Native app. You will need to compile your project to generate the APK file. The [Expo Go 'Create your first build' guide](https://docs.expo.dev/build/setup/) provides the steps to use the EAS cloud service for the compilation. However, we prefer to compile locally, using the [Expo Go 'Local app development' guide](https://docs.expo.dev/guides/local-app-development/). Below is a summary of the steps you need to perform.
@@ -351,12 +359,6 @@ Finally, follow the steps explained in the '<u>Install with adb</u>' section of 
 Once you have the app installed in your phone, have fun!
 
 
-
-Alternatively, you can build & run with a single command, as explained in the 'Local app development' guide:
-
-```
-npx expo run:android
-```
 
 You can also deploy the APK on an AVD as well. According to the Expo Go 'Build APKs for Android Emulators and devices' guide, the command is:
 
