@@ -218,7 +218,7 @@ You should get a `Nest application successfully started`.
 
 There are different ways to deploy and launch the Messageme app. Expo Go provides a shell environment to easily and quickly test features. If you want a standalone app, then you want to deploy a bare React Native build. Besides, you may want to either use virtual or physical devices. Choose the option(s) below that you want.
 
-### Launching the app on a physical device with Expo Go
+### Launching the app on an Android device with Expo Go (managed workflow)
 
 With Expo Go, you use the Expo Go app as a bridge to execute the app. This is likely the fastest way to get it up and running.
 
@@ -230,7 +230,7 @@ npx expo start
 
 The app UI is pretty straightforward. If you have two mobile devices, you should now be able to play sending and receiving messages over a private chat!!
 
-### Launching the app on an Android emulator with Expo Go
+### Launching the app on an Android emulator
 
 Follow [this Expo Go guide for Android Studio emulator integration](https://docs.expo.dev/workflow/android-studio-emulator/).
 
@@ -292,7 +292,7 @@ For any AVDs you want to use, repeat the same steps: Make sure no other AVD is r
 
 Once you have installed the Expo Go on all your AVDs, you can then start all your AVDs at once, run the Expo Go app, launch Messageme, and play with sending and receiving messages.
 
-### Launching the app on an iOS emulator with Expo Go
+### Launching the app on an iOS emulator
 
 You should not need an Apple Developer account to use an iOS emulator, but you'll need a Mac to perform this step. The command is:
 
@@ -300,9 +300,21 @@ You should not need an Apple Developer account to use an iOS emulator, but you'l
 npx expo run:ios
 ```
 
-### Deploying the APK and running the app on a physical Android device (bare React Native)
+### Deploying and launching the app on an Android device directly (bare React Native)
 
-Here we will deploy the app as a bare React Native app. You will need to compile your project to generate the APK file. The [Expo Go 'Create your first build' guide](https://docs.expo.dev/build/setup/) provides the steps to use the EAS cloud service for the compilation. However, we prefer to compile locally, using the [Expo Go 'Local app development' guide](https://docs.expo.dev/guides/local-app-development/). Below is a summary of the steps you need to perform.
+This is known as a 'development build'. If you have not already, follow the steps explained in the '<u>Install with adb</u>' section of the [Expo Go 'Build APKs for Android Emulators and devices' guide](https://docs.expo.dev/build-reference/apk/#install-with-adb).
+
+Connect your device to the computer, with a cable. Make sure no other devices are connected, and that no Android emulators are running. The command is:
+
+```
+npx expo run:android
+```
+
+If you get a "*signatures do not match newer version; ignoring!*" error, you probably already have your app installed from a previous build. Delete the app and repeat the command.
+
+### Deploying the APK and running it on an Android device (bare React Native)
+
+This is known as a 'production build'. Here we will deploy the app as a bare React Native app. You will need to compile your project to generate the APK file. The [Expo Go 'Create your first build' guide](https://docs.expo.dev/build/setup/) provides the steps to use the EAS cloud service for the compilation. However, we prefer to compile locally, using the [Expo Go 'Local app development' guide](https://docs.expo.dev/guides/local-app-development/). Below is a summary of the steps you need to perform.
 
 We already have the Node.js, watchman, and Android Studio set up in previous steps. So now we have to install the JDK that we have downloaded from [here](https://wiki.openjdk.org/display/JDKUpdates/JDK+17u). NOTE: It does not work with Java 21.
 
@@ -354,15 +366,8 @@ eas build -p android --profile preview --local
 
 It should give you a `Build successful` and a message indicating where the APK artifact has been generated.
 
-Finally, follow the steps explained in the '<u>Install with adb</u>' section of the [Expo Go 'Build APKs for Android Emulators and devices' guide](https://docs.expo.dev/build-reference/apk/#install-with-adb).
+Finally, if you have not already, follow the steps explained in the '<u>Install with adb</u>' section of the [Expo Go 'Build APKs for Android Emulators and devices' guide](https://docs.expo.dev/build-reference/apk/#install-with-adb). If you get a "*signatures do not match newer version; ignoring!*" error, you probably already have your app installed from a previous build. Delete the app and repeat the APK installation process.
 
 Once you have the app installed in your phone, have fun!
 
-
-
-You can also deploy the APK on an AVD as well. According to the Expo Go 'Build APKs for Android Emulators and devices' guide, the command is:
-
-```
-eas build:run -p android
-```
 
