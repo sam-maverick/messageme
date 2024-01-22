@@ -216,9 +216,9 @@ You should get a `Nest application successfully started`.
 
 # Running the app
 
-There are different ways to deploy and launch the Messageme app. Expo Go provides a shell environment to easily and quickly test features. If you want a standalone app that you can publish, then you may want to deploy a bare React Native production build. Besides, you may want to either use virtual or physical devices. Choose the option(s) below that you want.
+There are different ways to deploy and launch the Messageme app. Expo Go provides a shell environment to easily and quickly test features. If you want a standalone app that you can publish, then you may want to deploy a production build. Besides, you may want to either use virtual or physical devices. Choose the option(s) below that you want.
 
-### Launching the app on an Android device with Expo Go (managed workflow)
+### Launching the app on an Android device with Expo Go
 
 With Expo Go, you use the Expo Go app as a bridge to execute the app. This is likely the fastest way to get it up and running.
 
@@ -230,7 +230,7 @@ npx expo start
 
 The app UI is pretty straightforward. If you have two mobile devices, you should now be able to play sending and receiving messages over a private chat!!
 
-### Launching the app on an Android emulator with Expo Go (managed workflow)
+### Launching the app on an Android emulator with Expo Go
 
 Follow [this Expo Go guide for Android Studio emulator integration](https://docs.expo.dev/workflow/android-studio-emulator/).
 
@@ -300,7 +300,7 @@ You should not need an Apple Developer account to use an iOS emulator, but you'l
 npx expo run:ios
 ```
 
-### Deploying and launching the app on an Android device directly (bare React Native)
+### Deploying and launching the app on an Android device directly
 
 This is known as a 'development build'. If you have not already, follow the steps explained in the '<u>Install with adb</u>' section of the [Expo Go 'Build APKs for Android Emulators and devices' guide](https://docs.expo.dev/build-reference/apk/#install-with-adb).
 
@@ -312,7 +312,7 @@ npx expo run:android
 
 If you get a "*signatures do not match newer version; ignoring!*" error, you probably already have your app installed from a previous build. Delete the app and repeat the command.
 
-### Deploying the APK and running it on an Android device (bare React Native)
+### Deploying the APK and running it on an Android device
 
 This is known as a 'production build'. Here we will deploy the app as a bare React Native app. You will need to compile your project to generate the APK file. The [Expo Go 'Create your first build' guide](https://docs.expo.dev/build/setup/) provides the steps to use the EAS cloud service for the compilation. However, we prefer to compile locally, using the [Expo Go 'Local app development' guide](https://docs.expo.dev/guides/local-app-development/). Below is a summary of the steps you need to perform.
 
