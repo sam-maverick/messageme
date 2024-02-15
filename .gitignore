@@ -21,7 +21,8 @@ server/web-build/
 *.key
 *.mobileprovision
 
-*.apk
+#APK
+client/*.apk
 
 # Metro
 .metro-health-check*
