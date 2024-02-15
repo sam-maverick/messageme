@@ -1,17 +1,14 @@
 # Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
 # dependencies
-client/node_modules/
-server/node_modules/
+node_modules/
 
 # Expo
-client/.expo/
-client/dist/
-client/web-build/
-server/.expo/
-server/dist/
-server/web-build/
+.expo/
+dist/
+web-build/
 
+scratchpaper/
 
 # Native
 *.orig.*
@@ -21,24 +18,16 @@ server/web-build/
 *.key
 *.mobileprovision
 
-#APK
-client/*.apk
+# APK files
+*.apk
 
 # Metro
 .metro-health-check*
-client/.metro-health-check*
-server/.metro-health-check*
 
 # debug
 npm-debug.*
 yarn-debug.*
 yarn-error.*
-client/npm-debug.*
-client/yarn-debug.*
-client/yarn-error.*
-server/npm-debug.*
-server/yarn-debug.*
-server/yarn-error.*
 
 # macOS
 .DS_Store
@@ -46,21 +35,17 @@ server/yarn-error.*
 
 # local env files
 .env*.local
-client/.env*.local
-server/.env*.local
 
 # typescript
 *.tsbuildinfo
 
 # Ignore Gradle project-specific cache directory
-client/.gradle
-server/.gradle
+.gradle
 
 # Ignore Gradle build output directory
-client/build
-server/build
+build
 
 # npx expo-doctor  
 # This project has native project folders but is also configured to use Prebuild. EAS Build will not sync your native configuration if the ios or android folders are present. Add these folders to your .gitignore file if you intend to use prebuild (aka "managed" workflow).
-client/android/
-client/ios/
+android/
+ios/

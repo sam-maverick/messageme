@@ -18,6 +18,9 @@ scratchpaper/
 *.key
 *.mobileprovision
 
+# APK files
+*.apk
+
 # Metro
 .metro-health-check*
 
