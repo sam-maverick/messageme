@@ -40,7 +40,8 @@
       "supportsTablet": true,
       "bundleIdentifier": "pt.lasige.messageme",
       "infoPlist": {
-        "NSCameraUsageDescription": "This app uses the camera to let users share images in private chats."
+        "NSCameraUsageDescription": "This app uses the camera to let users share images in private chats.",
+        "NSAppTransportSecurity": { "NSAllowsArbitraryLoads": true }
       }
     },
     "android": {

@@ -209,7 +209,7 @@ npm i -g @nestjs/cli
 From the `server/` folder, start the server:
 
 ```
-npm start
+npm start --reset-cache
 ```
 
 You should get a `Nest application successfully started`.
@@ -283,7 +283,7 @@ emulator @<avd_name>
 From the client/ folder, start Expo Go:
 
 ```
-npx expo start
+npx expo start --reset-cache
 ```
 
 Make sure you have only one emulator running, and that no phones connected to your computer via cable. Then, press `a` for `open Android`. It will automatically install the Expo Go app, and launch your app.
