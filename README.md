@@ -218,6 +218,8 @@ You should get a `Nest application successfully started`.
 
 There are different ways to deploy and launch the Messageme app. Expo Go provides a shell environment to easily and quickly test features. If you want a standalone app that you can publish, then you may want to deploy a production build. Besides, you may want to either use virtual or physical devices. Choose the option(s) below that you want.
 
+The tasks below are to be performed from the `client/` folder.
+
 ### Launching the app on an Android device with Expo Go
 
 With Expo Go, you use the Expo Go app as a bridge to execute the app. This is likely the fastest way to get it up and running.
@@ -312,6 +314,14 @@ npx expo run:android
 
 If you get a "*signatures do not match newer version; ignoring!*" error, you probably already have your app installed from a previous build. Delete the app and repeat the command.
 
+Alternatively, you can use a script we provide, that manages versioning, clears previous build, and performs other helpful tasks:
+
+```
+./build.sh managed <patchlevel>
+```
+
+where `patchlevel` is patch, minor, or major
+
 ### Deploying the APK and running it on an Android device
 
 This is known as a 'production build'. Here we will deploy the app as a bare React Native app. You will need to compile your project to generate the APK file. The [Expo Go 'Create your first build' guide](https://docs.expo.dev/build/setup/) provides the steps to use the EAS cloud service for the compilation. However, we prefer to compile locally, using the [Expo Go 'Local app development' guide](https://docs.expo.dev/guides/local-app-development/). Below is a summary of the steps you need to perform.
@@ -336,7 +346,19 @@ npx expo-doctor
 
 It should give `Didn't find any issues with the project!`
 
-Prepare your first build:
+
+
+You can use a script we provide, that manages versioning, clears previous build, and performs other helpful tasks:
+
+```
+./build.sh <buildtype> <patchlevel>
+```
+
+where `patchlevel` is patch, minor, or major, and `buildtype` is either apk or aab.
+
+
+
+Alternatively, instead of build.sh, you can perform the commands below:
 
 ```
 npx expo prebuild --clean
