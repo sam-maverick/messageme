@@ -18,8 +18,13 @@ scratchpaper/
 *.key
 *.mobileprovision
 
-# APK files
+# Artifact files
 *.apk
+*.aab
+*.ipa
+
+# Local git used by EAS compiler. Rename .git to .git2 before initial commit, then rename .git2 to .git and commit again
+.git2
 
 # Metro
 .metro-health-check*

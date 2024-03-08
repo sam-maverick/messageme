@@ -38,17 +38,6 @@ if [ $RESULT != 0 ]; then
 fi
 
 
-# In case we made changes to the app-integrity-android-standard module (remember to upstream changes within app-integrity-android-standard, first)
-echo "Updating app-integrity-android-standard module from servers"
-npm update app-integrity-android-standard
-RESULT=$?
-if [ $RESULT != 0 ]; then
-    echo "Aborting on $RESULT, command failed:"
-    echo "npm update ..."
-    exit $RESULT
-fi
-
-
 # Clear previous builds
 if [ "$1" = "aab" ]; then
     rm -f ./*.aab
@@ -81,15 +70,6 @@ git commit -m "Dummy commit"
 
 echo "Prebuild cleanup"
 npx expo prebuild --clean
-RESULT=$?
-if [ $RESULT != 0 ]; then
-    echo "Aborting on $RESULT, command failed:"
-    echo "npx expo prebuild ..."
-    exit $RESULT
-fi
-
-echo "Applying patches of patch-package"
-npx patch-package
 RESULT=$?
 if [ $RESULT != 0 ]; then
     echo "Aborting on $RESULT, command failed:"
