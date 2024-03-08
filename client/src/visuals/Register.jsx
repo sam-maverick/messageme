@@ -13,7 +13,7 @@ import { TabsComponent } from './Tabs.jsx';
 import { ApiCreateAccount } from '../network/networkApi.js';
 
 import storage from '../storage/storageApi.js';
-import { PARAM_LOGGING_LEVEL } from '../parameters.js';
+import { PARAM_LOGGING_LEVEL, PARAM_SERVER_API_URL } from '../parameters.js';
 
 
 
@@ -61,7 +61,7 @@ export const RegisterComponent = props => {
                 ErrorAlert(resApi.resultMessage);  // Server-side error
             } else {
                 try {
-                    storage.save({
+                    await storage.save({
                         key: 'accountData', // Note: Do not use underscore("_") in key!
                         data: {
                             'username': username,
@@ -77,7 +77,7 @@ export const RegisterComponent = props => {
             }
         } catch(error) {
             //console.error(error);
-            ErrorAlert(error.message, error);  // Network error
+            ErrorAlert(error.message + '(' + PARAM_SERVER_API_URL + ')', error);  // Network error
         }
     }    
 

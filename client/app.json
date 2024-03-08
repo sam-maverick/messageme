@@ -13,14 +13,13 @@
           "android": {
               "compileSdkVersion": 33,
               "targetSdkVersion": 34,
-              "usesCleartextTraffic": true,
+              "usesCleartextTraffic": true
           },
           "ios": {
               "deploymentTarget": "16.0"
-          },
-        }          
-          
-      ],
+          }
+        }             
+      ]
     ],
     "name": "messageme-client",
     "slug": "messageme-client",
@@ -31,7 +30,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff",
+      "backgroundColor": "#ffffff"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -52,16 +51,16 @@
       "permissions": [
         "CAMERA",
         "WRITE_EXTERNAL_STORAGE",
-        "CAMERA_ROLL",
+        "CAMERA_ROLL"
       ],
       "package": "pt.lasige.messageme",
     },
     "web": {
-      "favicon": "./assets/favicon.png",
+      "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "f4e9da43-0172-489b-974a-05e386615eb8",
+        "projectId": "f4e9da43-0172-489b-974a-05e386615eb8"
       }
     }
   }
