@@ -23,7 +23,7 @@
     ],
     "name": "messageme-client",
     "slug": "messageme-client",
-    "version": "1.0.13",
+    "version": "1.1.13",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
