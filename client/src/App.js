@@ -9,24 +9,24 @@ import Storage from 'react-native-storage';
 //import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import * as FileSystem from 'expo-file-system';
+import { registerRootComponent } from 'expo';
 
 
+import { PARAM_IMAGES_DIRNAME } from './parameters.js';
+import { PARAM_LOGGING_LEVEL } from './parameters.js';
 
-import { PARAM_IMAGES_DIRNAME } from './src/parameters.js';
-import { PARAM_LOGGING_LEVEL } from './src/parameters.js';
+import { styles } from './visuals/myVisualsLibrary.jsx';
+import { EraseLocalData, ErrorAlert, InitialisationActions, LogMe, UpdateLogMeUsername } from './myGeneralLibrary.jsx';
 
-import { styles } from './src/visuals/myVisualsLibrary.jsx';
-import { EraseLocalData, ErrorAlert, InitialisationActions, LogMe, UpdateLogMeUsername } from './src/myGeneralLibrary.jsx';
+import storage from './storage/storageApi.js';
 
-import storage from './src/storage/storageApi.js';
+import { TabsComponent } from './visuals/Tabs.jsx';
+import { SettingsComponent } from './visuals/Settings.jsx';
+import { ChatsComponent } from './visuals/Chats.jsx';
+import { RegisterComponent } from './visuals/Register.jsx';
+import { PrivateChatComponent } from './visuals/PrivateChat.jsx';
 
-import { TabsComponent } from './src/visuals/Tabs.jsx';
-import { SettingsComponent } from './src/visuals/Settings.jsx';
-import { ChatsComponent } from './src/visuals/Chats.jsx';
-import { RegisterComponent } from './src/visuals/Register.jsx';
-import { PrivateChatComponent } from './src/visuals/PrivateChat.jsx';
-
-import { ApiCheckAccount } from './src/network/networkApi.js';
+import { ApiCheckAccount } from './network/networkApi.js';
 
 
 
@@ -147,7 +147,7 @@ export default function App() {
 
 
 
-
+registerRootComponent(App);
 
 
 
