@@ -57,7 +57,7 @@
         "CAMERA_ROLL"
       ],
       "package": "pt.lasige.messageme",
-      "versionCode": 6
+      "versionCode": 7
     },
     "web": {
       "favicon": "./assets/favicon.png"
