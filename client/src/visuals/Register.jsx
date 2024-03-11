@@ -26,20 +26,20 @@ export const RegisterComponent = props => {
     useEffect( () => {  // This is executed when the app is launched
         async function didMount() { // Do not change the name of this function
             // Do stuff
-            if (PARAM_LOGGING_LEVEL>=1) {  LogMe('useEffect of Register invocation');  }           
+            LogMe(1, 'useEffect of Register invocation');           
         }
         didMount();  // If we want useEffect to be asynchronous, we have to define didMount as async and call it right after
         return async function didUnmount() { // Do not change the name of this function
           // Cleanup tasks
-          if (PARAM_LOGGING_LEVEL>=1) {  LogMe('useEffect of Register cleanup');  }
+          LogMe(1, 'useEffect of Register cleanup');
         };
     }, []);  // App.js does not have props
 
 
     async function ComponentRefresh() {  // Invoked every time this screen is loaded
-        if (PARAM_LOGGING_LEVEL>=1) {  LogMe('Refreshing Register Component');  }
+        LogMe(1, 'Refreshing Register Component');
         if (initStatus.key === 'init') {
-            if (PARAM_LOGGING_LEVEL>=1) {  LogMe('Initialising Register Component');  }
+            LogMe(1, 'Initialising Register Component');
             initStatus.key = 'updated'; //update without rendering
             //initStatus({ key:'updated'}); //update with rendering
             // This will reach only on the first time the scren is loaded

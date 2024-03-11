@@ -31,20 +31,20 @@ export const SettingsComponent = props => {
     useEffect( () => {  // This is executed when the app is launched
         async function didMount() { // Do not change the name of this function
             // Do stuff
-            if (PARAM_LOGGING_LEVEL>=1) {  LogMe('useEffect of Settings invocation');  }           
+            LogMe(1, 'useEffect of Settings invocation');           
         }
         didMount();  // If we want useEffect to be asynchronous, we have to define didMount as async and call it right after
         return async function didUnmount() { // Do not change the name of this function
           // Cleanup tasks
-          if (PARAM_LOGGING_LEVEL>=1) {  LogMe('useEffect of Settings cleanup');  }
+          LogMe(1, 'useEffect of Settings cleanup');
         };
     }, []);  // App.js does not have props
 
 
     async function ComponentRefresh() {  // Invoked every time this screen is loaded
-        if (PARAM_LOGGING_LEVEL>=1) {  LogMe('Refreshing Settings Component');  }
+        LogMe(1, 'Refreshing Settings Component');
         if (initStatus.key === 'init') {
-            if (PARAM_LOGGING_LEVEL>=1) {  LogMe('Initialising Settings Component');  }
+            LogMe(1, 'Initialising Settings Component');
             initStatus.key = 'updated'; //update without rendering
             //initStatus({ key:'updated'}); //update with rendering
             // This will reach only on the first time the scren is loaded
@@ -58,7 +58,7 @@ export const SettingsComponent = props => {
 
 
     async function HandlerForLocalDataEraseFromSettings() {
-        if (PARAM_LOGGING_LEVEL>=1) {  LogMe('HandlerForLocalDataEraseFromSettings()');  }
+        LogMe(1, 'HandlerForLocalDataEraseFromSettings()');
         try {
             await EraseLocalData();
             if (__DEV__) {
@@ -76,7 +76,7 @@ export const SettingsComponent = props => {
 
 
     async function EraseAllServerData() {
-        if (PARAM_LOGGING_LEVEL>=1) {  LogMe('EraseAllServerData()');  }
+        LogMe(1, 'EraseAllServerData()');
         Alert.alert('Confirmation', 'All user data on the server side, as well as the app\'s local data, will be erased. All other client apps will have to be restarted. Are you sure you want to continue?', [
           {
             text: 'Cancel',

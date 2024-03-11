@@ -25,18 +25,18 @@ export function UpdateLogMeUsername (theusername) {
     LogMeUsername = theusername;
 }
 
-
-export function LogMe(message) {
-    let usernameHeader = '';
-    if (! LogMeUsername === false) {
-        usernameHeader = '['+LogMeUsername+']: ';
+export function LogMe(level, message) {
+    if (level <= PARAM_LOGGING_LEVEL) {
+        let usernameHeader = '';
+        if (! LogMeUsername === false) {
+            usernameHeader = '['+LogMeUsername+']: ';
+        }
+        console.log(usernameHeader + message);
     }
-    console.log(usernameHeader + message);
 }
 
-
 export function ErrorAlert(message, errorObject) {
-    if (PARAM_LOGGING_LEVEL>=1) { LogMe('* * * * * * ERROR * * * * * *  ' + message); }
+    LogMe(1, '* * * * * * ERROR * * * * * *  ' + message);
     if (PARAM_LOGGING_LEVEL>=1 & errorObject!=undefined) { console.log(errorObject.stack); }
     Alert.alert(
       'Error',
@@ -49,7 +49,7 @@ export function ErrorAlert(message, errorObject) {
 }
 
 export function InfoMessage(title, message) {
-    if (PARAM_LOGGING_LEVEL>=2) {  LogMe('INFO provided to the user: ' + title + ': ' + message);  }
+    LogMe(2, 'INFO provided to the user: ' + title + ': ' + message);
     Alert.alert(
       title,
       message,
@@ -61,7 +61,7 @@ export function InfoMessage(title, message) {
 }
 
 export async function InitialisationActions() {
-    if (PARAM_LOGGING_LEVEL>=1) {  LogMe('InitialisationActions()'); }
+    LogMe(1, 'InitialisationActions()');
 
     LogMeUsername = false;
 
@@ -80,7 +80,7 @@ export async function InitialisationActions() {
 
 
 export async function  EraseLocalData() {
-    if (PARAM_LOGGING_LEVEL>=1) {  LogMe('EraseLocalData()');  }
+    LogMe(1, 'EraseLocalData()');
     // delete images folder
     try {
         await FileSystem.deleteAsync(FileSystem.documentDirectory + PARAM_IMAGES_DIRNAME, {idempotent: true})  // Because idempotent is set to true, it does not throw error if directory does not exist

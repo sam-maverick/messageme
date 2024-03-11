@@ -13,7 +13,7 @@ const POST_HEADERS = {
 
 
 export async function ApiReceiveMessage(cookie) {
-    if (PARAM_LOGGING_LEVEL>=1) { LogMe('ApiReceiveMessage()'); };
+    LogMe(1, 'ApiReceiveMessage()');;
     return fetch(`${PARAM_SERVER_API_URL}/messages/receiveMessage`, {
         ...POST_HEADERS,
         body: JSON.stringify({cookie}),
@@ -39,7 +39,7 @@ export async function ApiSendMessage(cookie, recipient, message) {
 
 export async function ApiResetFactoryDB() {
 
-    if (PARAM_LOGGING_LEVEL>=1) {  LogMe('API: ApiResetDB');  }
+    LogMe(1, 'API: ApiResetDB');
 
     return fetch(`${PARAM_SERVER_API_URL}/administration/resetFactoryDB`, {
         ...POST_HEADERS,
@@ -51,7 +51,7 @@ export async function ApiResetFactoryDB() {
 
 export async function ApiCreateAccount(username) {
 
-    if (PARAM_LOGGING_LEVEL>=1) {  LogMe('API: ApiCreateAccount');  }
+    LogMe(1, 'API: ApiCreateAccount');
 
     return fetch(`${PARAM_SERVER_API_URL}/accounts/createAccount`, {
         ...POST_HEADERS,
@@ -63,7 +63,7 @@ export async function ApiCreateAccount(username) {
 
 export async function ApiCheckAccount(cookie) {
 
-    if (PARAM_LOGGING_LEVEL>=1) {  LogMe('API: ApiCheckAccount');  }
+    LogMe(1, 'API: ApiCheckAccount');
 
     return fetch(`${PARAM_SERVER_API_URL}/accounts/checkAccount`, {
         ...POST_HEADERS,
@@ -76,7 +76,7 @@ export async function ApiCheckAccount(cookie) {
 
 export async function ApiGetAccountsList(cookie) {
 
-    if (PARAM_LOGGING_LEVEL>=1) {  LogMe('API: ApiGetAccountsList');  }
+    LogMe(1, 'API: ApiGetAccountsList');
 
     return fetch(`${PARAM_SERVER_API_URL}/accounts/getAccountsList`, {
         ...POST_HEADERS,
@@ -90,7 +90,7 @@ export async function ApiGetAccountsList(cookie) {
 
 export async function ApiTestNetworkConnection() {
 
-    if (PARAM_LOGGING_LEVEL>=1) {  LogMe('API: ApiTestNetworkConnection');  }
+    LogMe(1, 'API: ApiTestNetworkConnection');
 
     return fetch(`${PARAM_SERVER_API_URL}/test/doNothing`, {
         ...POST_HEADERS,

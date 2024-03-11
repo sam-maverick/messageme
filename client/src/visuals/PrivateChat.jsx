@@ -100,9 +100,9 @@ export const PrivateChatComponent = props => {
 
 
     async function ComponentRefresh() {  // Invoked every time this screen is loaded
-        if (PARAM_LOGGING_LEVEL>=1) { LogMe('Refreshing PrivateChat Component');  }
+        LogMe(1, 'Refreshing PrivateChat Component');
         if (initStatus.key === 'init') {
-            if (PARAM_LOGGING_LEVEL>=1) { LogMe('Initialising PrivateChat Component');  }
+            LogMe(1, 'Initialising PrivateChat Component');
             initStatus.key = 'updated'; //update without rendering
             //initStatus({ key:'updated'}); //update with rendering
             // This will reach only on the first time the scren is loaded
@@ -115,7 +115,7 @@ export const PrivateChatComponent = props => {
     */
     useEffect( () => {  // This is executed when the app is launched
         async function didMount() { // Do not change the name of this function
-            if (PARAM_LOGGING_LEVEL>=1) { LogMe('useEffect of PrivateChat invocation');  }           
+            LogMe(1, 'useEffect of PrivateChat invocation');           
 
             await UpdateListOfMessages(K_FROM_SCRATCH);
             
@@ -131,7 +131,7 @@ export const PrivateChatComponent = props => {
         didMount();  // If we want useEffect to be asynchronous, we have to define didMount as async and call it right after
         return async function didUnmount() { // Do not change the name of this function
           // Cleanup tasks
-          if (PARAM_LOGGING_LEVEL>=1) { LogMe('useEffect of PrivateChat cleanup');  }
+          LogMe(1, 'useEffect of PrivateChat cleanup');
           await MyWebsocketDisconnect();
         };
     }, [props]);  // Put [] if the useEffect code does not need to access props or parameters, or set to [props.state1] or to [props] otherwise
@@ -139,19 +139,19 @@ export const PrivateChatComponent = props => {
 
 
     const WsPongHandler = async (someserverdata) => {
-        if (PARAM_LOGGING_LEVEL>=1) { LogMe('WS: WsPongHandler()');  } 
-        if (PARAM_LOGGING_LEVEL>=2) { LogMe('   with data: #' + JSON.stringify(someserverdata) + '#');  } 
+        LogMe(1, 'WS: WsPongHandler()'); 
+        LogMe(2, '   with data: #' + JSON.stringify(someserverdata) + '#'); 
     }
 
     const WsErrorHandler = async (someserverdata) => {
-        if (PARAM_LOGGING_LEVEL>=1) { LogMe('WS: WsErrorHandler()');  } 
-        if (PARAM_LOGGING_LEVEL>=2) { LogMe('   with data: #' + JSON.stringify(someserverdata) + '#');  } 
+        LogMe(1, 'WS: WsErrorHandler()'); 
+        LogMe(2, '   with data: #' + JSON.stringify(someserverdata) + '#'); 
         ErrorAlert(someserverdata);
     }
 
     const WsNewMessageNotificationHandler = async (someserverdata) => {
-        if (PARAM_LOGGING_LEVEL>=1) { LogMe('WS: WsNewMessageNotificationHandler()');  } 
-        if (PARAM_LOGGING_LEVEL>=2) { LogMe('   with data: #' + JSON.stringify(someserverdata) + '#');  } 
+        LogMe(1, 'WS: WsNewMessageNotificationHandler()'); 
+        LogMe(2, '   with data: #' + JSON.stringify(someserverdata) + '#'); 
         
         // If the user sending the notification coincides with our open PrivateChat, refresh it with new messages from server
         if(props.remoteUsername == someserverdata.fromUser) {
@@ -164,7 +164,7 @@ export const PrivateChatComponent = props => {
 
     
     const WebsocketOnOpenEventPC = () => {
-        if (PARAM_LOGGING_LEVEL>=1) { LogMe('WS: WebsocketOnOpenEventPC');  }
+        LogMe(1, 'WS: WebsocketOnOpenEventPC');
         setWsConnectionStatusIcon(
             <TouchableOpacity onPress={() => InfoMessage('Connection status','Connected to the server. The chat will be updated automatically with new messages.')}>
                 <Icon
@@ -178,7 +178,7 @@ export const PrivateChatComponent = props => {
     }
 
     const WebsocketOnCloseEventPC = () => {
-        if (PARAM_LOGGING_LEVEL>=1) { LogMe('WS: WebsocketOnCloseEventPC');  }
+        LogMe(1, 'WS: WebsocketOnCloseEventPC');
         setWsConnectionStatusIcon(
             <TouchableOpacity onPress={() => InfoMessage('Connection status','Connected to the server. The chat will be updated automatically with new messages.')}>
                 <Icon
@@ -199,7 +199,7 @@ export const PrivateChatComponent = props => {
     //    K_FROM_SCRATCH        --> Updates both the local history and the enqueued server messages. To be called only once when loading the component
     //    K_ONLY_SERVER_QUEUE   --> Only updates with the enqueued server messages appending any new messages onto the current component
 
-        if (PARAM_LOGGING_LEVEL>=1) { LogMe('UpdateListOfMessages()'); }       
+        LogMe(1, 'UpdateListOfMessages()');       
         if (PARAM_LOGGING_LEVEL>=2) { LogMe('messagesGC is:');}
         if (PARAM_LOGGING_LEVEL>=2) { LogMe('#'+JSON.stringify(messagesGC)+'#');}
 
@@ -212,9 +212,9 @@ export const PrivateChatComponent = props => {
         // Retrieve local saved message history
         localSavedMessages = await GetLocalSavedHistory();
         if (localSavedMessages === false) {
-            if (PARAM_LOGGING_LEVEL>=1) { LogMe('The local history is empty'); }                      
+            LogMe(1, 'The local history is empty');                      
         } else {
-            if (PARAM_LOGGING_LEVEL>=2) { LogMe('Loaded local history is:'); LogMe('#'+JSON.stringify(localSavedMessages)+'#');  }           
+            LogMe(2, 'Loaded local history is:'); LogMe('#'+JSON.stringify(localSavedMessages)+'#');           
             totalBuffer = localSavedMessages;
         }
 
@@ -229,9 +229,9 @@ export const PrivateChatComponent = props => {
             }
         }
         if (areThereNewMessagesOnServer === true) {
-            if (PARAM_LOGGING_LEVEL>=1) { LogMe('No new messages on the server'); }  
+            LogMe(1, 'No new messages on the server');  
         } else {
-            if (PARAM_LOGGING_LEVEL>=2) { LogMe('Downloaded server messages:'); LogMe('#'+JSON.stringify(serverMessagesBuffer)+'#');  }           
+            LogMe(2, 'Downloaded server messages:'); LogMe('#'+JSON.stringify(serverMessagesBuffer)+'#');           
         }
         
 
@@ -248,7 +248,7 @@ export const PrivateChatComponent = props => {
         } 
             
         // Finally, update the UI at once
-        if (PARAM_LOGGING_LEVEL>=1) { LogMe('Updating the UI with our messagesGC'); }                       
+        LogMe(1, 'Updating the UI with our messagesGC');                       
         if ([K_FROM_SCRATCH].indexOf(mode) > -1) {
             setMessagesGC(totalBuffer);  // We can only do this at the startup!!!
         } else if ([K_ONLY_SERVER_QUEUE].indexOf(mode) > -1) {
@@ -288,11 +288,11 @@ export const PrivateChatComponent = props => {
 
     async function FetchNewMessageFromServer() {
     // Returns a new message if new message is received from the server queue, otherwise it returns false
-        if (PARAM_LOGGING_LEVEL>=1) { LogMe('FetchNewMessageFromServer()'); };
+        LogMe(1, 'FetchNewMessageFromServer()');;
 
         try {
             let resReceiveMessage = await ApiReceiveMessage(props.AccountData.cookie);
-            if (PARAM_LOGGING_LEVEL>=1) { LogMe('FetchNewMessageFromServer(): ApiReceiveMessage finished');  };
+            LogMe(1, 'FetchNewMessageFromServer(): ApiReceiveMessage finished');;
 
             if (!resReceiveMessage.isSuccessful) {
                 ErrorAlert(resReceiveMessage.resultMessage);  // Server-side error
@@ -313,7 +313,7 @@ export const PrivateChatComponent = props => {
                         const imageRegex = /^data:image\/([0-9a-zA-Z]+);base64,(.+)$/;
 
                         let extractedData = imageRegex.exec(resReceiveMessage.messageContainer.message[0].image);
-                        if (PARAM_LOGGING_LEVEL>=1) { LogMe('FetchNewMessageFromServer(): regex data extraction finished');  };
+                        LogMe(1, 'FetchNewMessageFromServer(): regex data extraction finished');;
                         // Returns an array where the [0] is the initial string and the subsequent []'s are the classes enclosed within (), or else null if the match fails. In our case [1] is the extension and [2] is the image contents
                         if (extractedData == null) {
                             ErrorAlert('Incorrect image format received.');
@@ -326,7 +326,7 @@ export const PrivateChatComponent = props => {
                             } else {
                                 let imagefilename = uuid.v4() + '.' + extractedData[1];
                                 let fullpathimagefilename = FileSystem.documentDirectory + PARAM_IMAGES_DIRNAME + '/' + imagefilename;
-                                if (PARAM_LOGGING_LEVEL>=1) { LogMe('   Expanded content size is: ' + extractedData[2].length + ' bytes'); }
+                                LogMe(1, '   Expanded content size is: ' + extractedData[2].length + ' bytes');
 
                                 try {
                                     // Save image to our file workspace
@@ -339,11 +339,11 @@ export const PrivateChatComponent = props => {
                                     }   
              
             
-                                    if (PARAM_LOGGING_LEVEL>=1) { LogMe('FetchNewMessageFromServer(): file writing finished');  };
+                                    LogMe(1, 'FetchNewMessageFromServer(): file writing finished');;
 
                                     resReceiveMessage.messageContainer.message[0].image = fullpathimagefilename;
                                     
-                                    if (PARAM_LOGGING_LEVEL>=2) { LogMe('Completed reception of message: #' + JSON.stringify(resReceiveMessage.messageContainer.message[0])+'#');  };
+                                    LogMe(2, 'Completed reception of message: #' + JSON.stringify(resReceiveMessage.messageContainer.message[0])+'#');;
 
                                 } catch(error) { 
                                     ErrorAlert(error.message, error);  // File write error
@@ -404,14 +404,14 @@ export const PrivateChatComponent = props => {
     };
 
     async function pickImage() {
-        if (PARAM_LOGGING_LEVEL>=1) { LogMe('pickImage() called'); }                       
+        LogMe(1, 'pickImage() called');                       
         const statusPhotoGallery = await ImagePicker.requestMediaLibraryPermissionsAsync();
         const statusCamera = await ImagePicker.requestCameraPermissionsAsync();
 
         let imgURI = null;
         const hasPermissionGranted = (statusPhotoGallery.granted & statusCamera.granted);
-        if (PARAM_LOGGING_LEVEL>=1) { LogMe('statusPhotoGallery is: ' + statusPhotoGallery.granted); }                       
-        if (PARAM_LOGGING_LEVEL>=1) { LogMe('statusCamera is: ' + statusCamera.granted); }                       
+        LogMe(1, 'statusPhotoGallery is: ' + statusPhotoGallery.granted);                       
+        LogMe(1, 'statusCamera is: ' + statusCamera.granted);                       
 
         if(!hasPermissionGranted) {
             ErrorAlert('Permissions not granted');
@@ -425,7 +425,7 @@ export const PrivateChatComponent = props => {
         });
 
         if (!result.canceled) {
-            if (PARAM_LOGGING_LEVEL>=1) { LogMe('pickImage() cancelled'); }                       
+            LogMe(1, 'pickImage() cancelled');                       
             imgURI = result.assets;
         }
 
@@ -437,7 +437,7 @@ export const PrivateChatComponent = props => {
     // ToDo: Be able to send a picture with a text, all within one message object.
     // Messages are an array of objects (which can contain a group of pictures, a picture with a comment, etc.)
     // but we currently only support messages with single items (1 pic, or 1 text)
-        if (PARAM_LOGGING_LEVEL>=1) { LogMe('sendRegularImage() called'); }                       
+        LogMe(1, 'sendRegularImage() called');                       
 
         setMessageProcessingStatusIcon(messageProcessingIconBusy);
 
@@ -463,7 +463,7 @@ export const PrivateChatComponent = props => {
 
                     let imagefilename = uuid.v4() + '.' + fileExt;
                     let fullpathimagefilename = FileSystem.documentDirectory + PARAM_IMAGES_DIRNAME + '/' + imagefilename;
-                    if (PARAM_LOGGING_LEVEL>=1) { LogMe('   Expanded content size is: ' + resFileRead.length + ' bytes'); }
+                    LogMe(1, '   Expanded content size is: ' + resFileRead.length + ' bytes');
 
                     try {
                         // Save image to our file workspace
@@ -477,7 +477,7 @@ export const PrivateChatComponent = props => {
 
                         let creationdate = new Date();
 
-                    if (PARAM_LOGGING_LEVEL>=1) { LogMe('calling sendMessage() for the selected image'); }                       
+                    LogMe(1, 'calling sendMessage() for the selected image');                       
         
                         sendMessage(
                             [{
@@ -522,7 +522,7 @@ export const PrivateChatComponent = props => {
     // newMessageLocalReference and newMessageContentsExpanded must be something like [{contents}]
     // In case of image, newMessageLocalReference has a pointer to a local file, and newMessageContentsExpanded has the embedded file in base64
     // In case of text newMessageLocalReference must be the same as newMessageContentsExpanded
-    if (PARAM_LOGGING_LEVEL>=1) { LogMe('sendMessage() called (text/image)'); }                       
+    LogMe(1, 'sendMessage() called (text/image)');                       
         
         //send message to server
         try {
@@ -553,7 +553,7 @@ export const PrivateChatComponent = props => {
                         },
                     })
                     
-                    if (PARAM_LOGGING_LEVEL>=2) { LogMe('Completing sendMessage() for this message [local ref]:'); LogMe('#'+JSON.stringify(newMessageLocalReference)+'#'); }
+                    LogMe(2, 'Completing sendMessage() for this message [local ref]:'); LogMe('#'+JSON.stringify(newMessageLocalReference)+'#');
 
                     /*
                     Caveat: Do not rely on reading messagesGC after this call. It does not get immediately updated with the last appended message!

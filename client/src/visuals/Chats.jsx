@@ -36,21 +36,21 @@ export const ChatsComponent = props => {
     useEffect( () => {  // Invoked every time this Screen is loaded
         async function didMount() { // Do not change the name of this function
             // Do stuff
-            if (PARAM_LOGGING_LEVEL>=1) {  LogMe('useEffect of Chats invoked');  }
+            LogMe(1, 'useEffect of Chats invoked');
             await DoInternalRefresh();
         }
         didMount();  // If we want useEffect to be asynchronous, we have to define didMount as async and call it right after
         return async function didUnmount() { // Do not change the name of this function
           // Cleanup tasks
-          if (PARAM_LOGGING_LEVEL>=1) {  LogMe('useEffect of Chats cleanup');  }
+          LogMe(1, 'useEffect of Chats cleanup');
         };
     }, [props]);  // Put [] if the useEffect code does not need to access props or parameters, or set to [props.state1] or to [props] otherwise
 
 
     async function ComponentRefresh() {  // Invoked every time this screen is loaded
-        if (PARAM_LOGGING_LEVEL>=1) {  LogMe('Refreshing Chats Component');  }
+        LogMe(1, 'Refreshing Chats Component');
         if (initStatus.key === 'init') {
-            if (PARAM_LOGGING_LEVEL>=1) {  LogMe('Initialising Chats Component');  }
+            LogMe(1, 'Initialising Chats Component');
             initStatus.key = 'updated'; //update without rendering
             //initStatus({ key:'updated'}); //update with rendering
             // This will reach only on the first time the scren is loaded
@@ -58,7 +58,7 @@ export const ChatsComponent = props => {
     }
    
     async function DoInternalRefresh() {
-        if (PARAM_LOGGING_LEVEL>=1) {  LogMe('DoInternalRefresh()');  }
+        LogMe(1, 'DoInternalRefresh()');
         //send request
         try {
             let apires = await ApiGetAccountsList(props.AccountData.cookie);

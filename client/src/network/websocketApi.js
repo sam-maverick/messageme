@@ -9,8 +9,8 @@ let mysocket = null;
 
 
 export async function WsApiEmitSomething(mycommand, mydata) {
-    if (PARAM_LOGGING_LEVEL>=1) { LogMe('WS: send message of ' + mycommand);  }
-    if (PARAM_LOGGING_LEVEL>=2) { LogMe('  with data: #' + JSON.stringify(mydata)+'#'); }
+    LogMe(1, 'WS: send message of ' + mycommand);
+    LogMe(2, '  with data: #' + JSON.stringify(mydata)+'#');
     mysocket.emit(mycommand, {myclientdata: mydata});
 }
 
@@ -18,7 +18,7 @@ export async function WsApiEmitSomething(mycommand, mydata) {
 
 export async function WsApiHandleReception(mycommand, MyDataHandler) {
     mysocket.on(mycommand, (data) => {
-        if (PARAM_LOGGING_LEVEL>=1) { LogMe('WS: handle message of ' + mycommand); }
+        LogMe(1, 'WS: handle message of ' + mycommand);
         MyDataHandler(data.myserverdata);
     });
 }
@@ -26,7 +26,7 @@ export async function WsApiHandleReception(mycommand, MyDataHandler) {
 
 export async function MyWebsocketConnect(mycookie, MyWebsocketOnOpen, MyWebsocketOnClose) {
 
-    if (PARAM_LOGGING_LEVEL>=1) { LogMe('WS: MyWebsocketConnect');  }
+    LogMe(1, 'WS: MyWebsocketConnect');
 
     mysocket = io(PARAM_SERVER_WS_URL, {
         transports: ['websocket'],
@@ -42,11 +42,11 @@ export async function MyWebsocketConnect(mycookie, MyWebsocketOnOpen, MyWebsocke
 
 export async function MyWebsocketDisconnect() {
     if (mysocket != null) {
-        if (PARAM_LOGGING_LEVEL>=1) { LogMe('WS: MyWebsocketDisconnect');  }
+        LogMe(1, 'WS: MyWebsocketDisconnect');
         mysocket.disconnect();
         mysocket.removeAllListeners();
     } else {
-        if (PARAM_LOGGING_LEVEL>=1) { LogMe('WS: MyWebsocketDisconnect could not be completed because the socket is null');  }   
+        LogMe(1, 'WS: MyWebsocketDisconnect could not be completed because the socket is null');   
     }
 }
 

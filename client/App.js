@@ -47,13 +47,13 @@ export default function App() {
     useEffect( () => {  // This is executed when the app is launched
         async function didMount() { // Do not change the name of this function
             // Do stuff
-            if (PARAM_LOGGING_LEVEL>=1) {  LogMe('useEffect of App invocation');  }
+            LogMe(1, 'useEffect of App invocation');
             await InitialisationActions();            
         }
         didMount();  // If we want useEffect to be asynchronous, we have to define didMount as async and call it right after
         return async function didUnmount() { // Do not change the name of this function
           // Cleanup tasks
-          if (PARAM_LOGGING_LEVEL>=1) {  LogMe('useEffect of App cleanup');  }
+          LogMe(1, 'useEffect of App cleanup');
         };
     }, []);  // App.js does not have props
 
@@ -61,11 +61,11 @@ export default function App() {
 
     // This is executed whenever the currentScreen is changed
     async function ComponentRefresh() {    
-        if (PARAM_LOGGING_LEVEL>=1) {  LogMe('Refreshing App Component');  }
+        LogMe(1, 'Refreshing App Component');
 
         if (currentScreen === 'Init') {   
         
-            if (PARAM_LOGGING_LEVEL>=1) {  LogMe('Initialising App Component');  }
+            LogMe(1, 'Initialising App Component');
 
             try {
 

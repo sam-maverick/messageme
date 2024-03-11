@@ -10,7 +10,7 @@ import { PARAM_LOGGING_LEVEL } from '../parameters.js';
 export const TabsComponent = props => {
 
     async function ComponentRefresh() {    
-        if (PARAM_LOGGING_LEVEL>=1) {  LogMe('Refreshing Tabs Component');  }
+        LogMe(1, 'Refreshing Tabs Component');
     }
 
 
