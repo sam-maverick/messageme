@@ -13,7 +13,6 @@ import { registerRootComponent } from 'expo';
 
 
 import { PARAM_IMAGES_DIRNAME } from './parameters.js';
-import { PARAM_LOGGING_LEVEL } from './parameters.js';
 
 import { styles } from './visuals/myVisualsLibrary.jsx';
 import { EraseLocalData, ErrorAlert, InitialisationActions, LogMe, UpdateLogMeUsername } from './myGeneralLibrary.jsx';

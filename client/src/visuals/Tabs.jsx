@@ -4,7 +4,6 @@ import { StyleSheet, Button, Text, TextInput, View } from 'react-native';
 
 import { styles } from './myVisualsLibrary.jsx';
 import { ErrorAlert, LogMe } from '../myGeneralLibrary.jsx';
-import { PARAM_LOGGING_LEVEL } from '../parameters.js';
 
 
 export const TabsComponent = props => {

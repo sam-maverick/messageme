@@ -7,8 +7,16 @@ import uuid from 'react-native-uuid';
 import { GiftedChat, GiftedChatState, Bubble, Send } from 'react-native-gifted-chat';
 import * as ImagePicker from 'expo-image-picker';
 
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { Icon } from 'react-native-elements';
+//import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faHourglass } from '@fortawesome/free-solid-svg-icons/faHourglass';
+import { faLink } from '@fortawesome/free-solid-svg-icons/faLink';
+import { faLinkSlash } from '@fortawesome/free-solid-svg-icons/faLinkSlash';
+import { faFileImage } from '@fortawesome/free-solid-svg-icons/faFileImage';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons/faPaperPlane';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons/faArrowLeft';
+import { faAnglesDown } from '@fortawesome/free-solid-svg-icons/faAnglesDown';
+//import { Icon } from 'react-native-elements';
 
 import * as FileSystem from 'expo-file-system';
 
@@ -27,7 +35,6 @@ import { ApiSendMessage, ApiReceiveMessage } from '../network/networkApi.js';
 import { MyWebsocketConnect, MyWebsocketDisconnect, WsApiEmitSomething, WsApiHandleReception } from '../network/websocketApi.js';
 
 import { PARAM_IMAGES_DIRNAME } from '../parameters.js';
-import { PARAM_LOGGING_LEVEL } from '../parameters.js';
 import { PARAM_IMAGE_PICKER_QUALITY } from '../parameters.js';
 
 
@@ -64,11 +71,10 @@ export const PrivateChatComponent = props => {
     const [initStatus, setInitStatus] = useState({ key: 'init' });
     const [WsConnectionStatusIcon, setWsConnectionStatusIcon] = useState( 
         <TouchableOpacity onPress={() => InfoMessage('Connection status','Trying to connect to the server...')}>
-            <Icon
+            <FontAwesomeIcon
                 size={24}
-                type="font-awesome"
-                name="hourglass"
-                color="black"
+                icon={faHourglass}
+                color={'black'}
             />
         </TouchableOpacity>
     );
@@ -78,19 +84,17 @@ export const PrivateChatComponent = props => {
 
 
     const messageProcessingIconIdle=
-                    <Icon
+                    <FontAwesomeIcon
                         size={24}
-                        type="font-awesome"
-                        name="hourglass"
-                        color="#aaa"
+                        icon={faHourglass}
+                        color={'#aaa'}
                     />;
 
     const messageProcessingIconBusy=
-                    <Icon
+                    <FontAwesomeIcon
                         size={24}
-                        type="font-awesome"
-                        name="hourglass"
-                        color="black"
+                        icon={faHourglass}
+                        color={'black'}
                     />;
 
    
@@ -167,11 +171,10 @@ export const PrivateChatComponent = props => {
         LogMe(1, 'WS: WebsocketOnOpenEventPC');
         setWsConnectionStatusIcon(
             <TouchableOpacity onPress={() => InfoMessage('Connection status','Connected to the server. The chat will be updated automatically with new messages.')}>
-                <Icon
+                <FontAwesomeIcon
                     size={24}
-                    type="font-awesome"
-                    name="link"
-                    color="green"
+                    icon={faLink}
+                    color={'green'}
                 />
             </TouchableOpacity>        
         );    
@@ -181,11 +184,10 @@ export const PrivateChatComponent = props => {
         LogMe(1, 'WS: WebsocketOnCloseEventPC');
         setWsConnectionStatusIcon(
             <TouchableOpacity onPress={() => InfoMessage('Connection status','Connected to the server. The chat will be updated automatically with new messages.')}>
-                <Icon
+                <FontAwesomeIcon
                     size={24}
-                    type="font-awesome"
-                    name="unlink"
-                    color="red"
+                    icon={faLinkSlash}
+                    color={'red'}
                 />
             </TouchableOpacity>        
         );    
@@ -200,8 +202,8 @@ export const PrivateChatComponent = props => {
     //    K_ONLY_SERVER_QUEUE   --> Only updates with the enqueued server messages appending any new messages onto the current component
 
         LogMe(1, 'UpdateListOfMessages()');       
-        if (PARAM_LOGGING_LEVEL>=2) { LogMe('messagesGC is:');}
-        if (PARAM_LOGGING_LEVEL>=2) { LogMe('#'+JSON.stringify(messagesGC)+'#');}
+        LogMe(2, 'messagesGC is:');
+        LogMe(2, '#'+JSON.stringify(messagesGC)+'#');
 
         let localSavedMessages = [];
 
@@ -214,7 +216,7 @@ export const PrivateChatComponent = props => {
         if (localSavedMessages === false) {
             LogMe(1, 'The local history is empty');                      
         } else {
-            LogMe(2, 'Loaded local history is:'); LogMe('#'+JSON.stringify(localSavedMessages)+'#');           
+            LogMe(2, 'Loaded local history is:'+'#'+JSON.stringify(localSavedMessages)+'#');           
             totalBuffer = localSavedMessages;
         }
 
@@ -231,7 +233,7 @@ export const PrivateChatComponent = props => {
         if (areThereNewMessagesOnServer === true) {
             LogMe(1, 'No new messages on the server');  
         } else {
-            LogMe(2, 'Downloaded server messages:'); LogMe('#'+JSON.stringify(serverMessagesBuffer)+'#');           
+            LogMe(2, 'Downloaded server messages:'+'#'+JSON.stringify(serverMessagesBuffer)+'#');           
         }
         
 
@@ -331,15 +333,10 @@ export const PrivateChatComponent = props => {
                                 try {
                                     // Save image to our file workspace
                                     let resFileWrite = await FileSystem.writeAsStringAsync(fullpathimagefilename, extractedData[2], {encoding: 'base64'});
-                                    if (PARAM_LOGGING_LEVEL>=1) {
-                                        let fileproperties = await FileSystem.getInfoAsync(fullpathimagefilename, {size: true});
-                                        LogMe('Downloaded file saved: ' + fullpathimagefilename); 
-                                        LogMe('   ' + fileproperties.size + ' bytes');
-                                        LogMe('   ' + 'with extension: ' + extractedData[1]);
-                                    }   
-             
-            
-                                    LogMe(1, 'FetchNewMessageFromServer(): file writing finished');;
+                                    LogMe(1, 'Downloaded file saved: ' + fullpathimagefilename); 
+                                    LogMe(1, '   ' + await FileSystem.getInfoAsync(fullpathimagefilename, {size: true}).size + ' bytes');
+                                    LogMe(1, '   ' + 'with extension: ' + extractedData[1]);
+                                    LogMe(1, 'FetchNewMessageFromServer(): file writing finished');
 
                                     resReceiveMessage.messageContainer.message[0].image = fullpathimagefilename;
                                     
@@ -377,11 +374,10 @@ export const PrivateChatComponent = props => {
 
               <TouchableOpacity onPress={sendRegularImage}>
                 <View style={styles.leftleft}>
-                    <Icon
-                      type="font-awesome"
-                      name="file-picture-o"
+                    <FontAwesomeIcon
+                      icon={faFileImage}
                       size={25}
-                      color='green'
+                      color={'green'}
                     />
                 </View>
               </TouchableOpacity>
@@ -389,11 +385,10 @@ export const PrivateChatComponent = props => {
               <Text>   </Text>
 
               <Send {...props} containerStyle={styles.leftcenter}>{/* Because of the {...props}, it inherits the onSend property  */}
-                  <Icon
-                    type="font-awesome"
-                    name="send"
+                  <FontAwesomeIcon
+                    icon={faPaperPlane}
                     size={25}
-                    color='brown'
+                    color={'brown'}
                   />
               </Send>
 
@@ -425,7 +420,7 @@ export const PrivateChatComponent = props => {
         });
 
         if (!result.canceled) {
-            LogMe(1, 'pickImage() cancelled');                       
+            LogMe(1, 'pickImage() not cancelled');                       
             imgURI = result.assets;
         }
 
@@ -449,11 +444,8 @@ export const PrivateChatComponent = props => {
                 // ToDo: handle multiple picture selection
                 try {
                     let resFileRead = await FileSystem.readAsStringAsync(resAssets[0].uri, {encoding: 'base64'}); // Read image contents
-                    if (PARAM_LOGGING_LEVEL>=1) {
-                        let fileproperties = await FileSystem.getInfoAsync(resAssets[0].uri, {size: true});
-                        LogMe('Asset file: ' + resAssets[0].uri); 
-                        LogMe('   ' + fileproperties.size + ' bytes');
-                    }   
+                    LogMe(1, 'Asset file: ' + resAssets[0].uri); 
+                    LogMe(1, '   ' + await FileSystem.getInfoAsync(resAssets[0].uri, {size: true}).size + ' bytes');
 
                     // We assume that the extension coincides with the ISO content-type
                     let fileExt = resAssets[0].uri.split('.').pop();
@@ -468,13 +460,10 @@ export const PrivateChatComponent = props => {
                     try {
                         // Save image to our file workspace
                         let resFileWrite = await FileSystem.writeAsStringAsync(fullpathimagefilename, resFileRead, {encoding: 'base64'});
-                        if (PARAM_LOGGING_LEVEL>=1) {
-                            let fileproperties = await FileSystem.getInfoAsync(fullpathimagefilename, {size: true});
-                            LogMe('Local file saved to workspace: ' + fullpathimagefilename); 
-                            LogMe('   ' + fileproperties.size + ' bytes');
-                            LogMe('   ' + 'with extension: ' + fileExt);
-                        }   
-
+                        LogMe(1, 'Local file saved to workspace: ' + fullpathimagefilename); 
+                        LogMe(1, '   ' + await FileSystem.getInfoAsync(fullpathimagefilename, {size: true}).size + ' bytes');
+                        LogMe(1, '   ' + 'with extension: ' + fileExt);
+  
                         let creationdate = new Date();
 
                     LogMe(1, 'calling sendMessage() for the selected image');                       
@@ -553,7 +542,7 @@ export const PrivateChatComponent = props => {
                         },
                     })
                     
-                    LogMe(2, 'Completing sendMessage() for this message [local ref]:'); LogMe('#'+JSON.stringify(newMessageLocalReference)+'#');
+                    LogMe(2, 'Completing sendMessage() for this message [local ref]:'+'#'+JSON.stringify(newMessageLocalReference)+'#');
 
                     /*
                     Caveat: Do not rely on reading messagesGC after this call. It does not get immediately updated with the last appended message!
@@ -602,10 +591,9 @@ export const PrivateChatComponent = props => {
                 <View style={styles.headertitleleftcenter}>
                     <Text style={styles.large}>  </Text>
                     <TouchableOpacity onPress={() => setCurrentScreenInMainComponent('Chats')}>
-                        <Icon
+                        <FontAwesomeIcon
                           size={35}
-                          type="font-awesome"
-                          name="arrow-left"
+                          icon={faArrowLeft}
                         />
                     </TouchableOpacity>                        
                  
@@ -636,7 +624,7 @@ export const PrivateChatComponent = props => {
                   }}
                   renderSend={renderSend}
                   scrollToBottom
-                  scrollToBottomComponent={ ()=> { return (<FontAwesome name="angle-double-down" size={22} color="#333"/>); } }         
+                  scrollToBottomComponent={ ()=> { return (<FontAwesomeIcon icon={faAnglesDown} size={22} color={'#333'} />); } }         
                 />
             </View>      
         </View>

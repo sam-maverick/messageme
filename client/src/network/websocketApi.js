@@ -1,7 +1,6 @@
 import io from 'socket.io-client';
 
 import { PARAM_SERVER_WS_URL } from '../parameters.js';
-import { PARAM_LOGGING_LEVEL } from '../parameters.js';
 import { ErrorAlert, LogMe } from '../myGeneralLibrary.jsx';
 
 

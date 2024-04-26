@@ -14,8 +14,6 @@ import { styles, RuleComponent, normalize, ChatSelectorComponent } from './myVis
 import { ErrorAlert, LogMe } from '../myGeneralLibrary.jsx';
 import { ApiGetAccountsList } from '../network/networkApi.js';
 
-import { PARAM_LOGGING_LEVEL } from '../parameters.js';
-
 
 
 export const ChatsComponent = props => {

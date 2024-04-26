@@ -8,14 +8,14 @@ clear
 
 
 echo "========================================================================================="
-echo "NOTE: If you switch from/to a bare build (AAB/APK) to/from a managed build, "
+echo "NOTE: If you switch from/to an EAS build (AAB/APK) to/from a bare workflow, "
 echo "remember to first uninstall the app, otherwise you will get a signature mismatch error."
 echo "========================================================================================="
 
 
 # Check parameters
-if [ "$1" != "apk" ] && [ "$1" != "aab" ] && [ "$1" != "managed" ]; then
-    echo "The first parameter is the build type, and must be either 'apk', 'aab', or 'managed'."
+if [ "$1" != "apk" ] && [ "$1" != "aab" ] && [ "$1" != "bare" ]; then
+    echo "The first parameter is the build type, and must be either 'apk', 'aab', or 'bare'."
     exit 1
 fi
 if [ "$2" != "major" ] && [ "$2" != "minor" ] && [ "$2" != "patch" ]; then
@@ -97,7 +97,7 @@ if [ "$1" = "apk" ]; then
         exit $RESULT
     fi
 fi
-if [ "$1" = "managed" ]; then
+if [ "$1" = "bare" ]; then
     npx expo run:android
     RESULT=$?
     if [ $RESULT != 0 ]; then

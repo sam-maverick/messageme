@@ -17,10 +17,6 @@ import storage from '../storage/storageApi.js';
 
 import { ApiResetFactoryDB } from '../network/networkApi.js';
 
-import { PARAM_LOGGING_LEVEL } from '../parameters.js';
-
-
-
 
 
 

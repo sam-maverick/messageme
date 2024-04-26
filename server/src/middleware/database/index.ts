@@ -17,6 +17,5 @@ export default async function ConnectDB() {
 
 
     let connectioninit = mongoose.connection;
-    if(!PARAM_DATABASE_URL) return LogMe("Please provide a mongoDB URL in PARAM_DATABASE_URL parameter of parameters.ts");
     await mongoose.connect(PARAM_DATABASE_URL, dbconnectionoptions);
 }

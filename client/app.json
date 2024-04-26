@@ -21,8 +21,8 @@
         }
       ]
     ],
-    "name": "messageme-client",
-    "slug": "messageme-client",
+    "name": "messageme",
+    "slug": "messageme",
     "version": "1.3.18",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

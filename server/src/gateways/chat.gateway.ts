@@ -1,7 +1,6 @@
 import { Server, Socket } from 'socket.io';
 import { OnGatewayConnection, OnGatewayDisconnect, OnGatewayInit, SubscribeMessage, WebSocketGateway, WebSocketServer, MessageBody, ConnectedSocket, WsResponse } from '@nestjs/websockets';
 
-import { PARAM_LOGGING_LEVEL } from '../parameters';
 import { PARAM_WEBSOCKET_PORT } from '../parameters';
 import { LogMe } from '../serverLibrary';
 import UsersModel from '../middleware/database/schemas/user';
@@ -26,7 +25,7 @@ implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
     private connectedUsers: { socketId: string; username: string }[] = [];
 
     afterInit() {
-      if (PARAM_LOGGING_LEVEL>=1)  { LogMe('WS: Websocket server is initialized'); }    
+      LogMe(1, 'WS: Websocket server is initialized');    
     }
   
 
@@ -37,13 +36,13 @@ implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
         if (requesteruser) {
             return requesteruser.username;
         } else {
-            if (PARAM_LOGGING_LEVEL>=1) { LogMe('checkUserCookie(): This cookie does not exist: ' + somecookie);  }   
+            LogMe(1, 'checkUserCookie(): This cookie does not exist: ' + somecookie);   
             return false;
         }    
     }  
 
     async handleConnection(client: Socket) {
-        if (PARAM_LOGGING_LEVEL>=1) { LogMe('WS: handleConnection');  }
+        LogMe(1, 'WS: handleConnection');
         const receivedCookie = client.handshake.auth.mycookie;
         const clientSocketId = client.id;
 
@@ -67,20 +66,20 @@ implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
             this.connectedUsers?.push( {socketId: clientSocketId, username: identifiedUsername,} );
         }
 
-        if (PARAM_LOGGING_LEVEL>=1)  { LogMe(`User ${client.id} has connected`); }
+        LogMe(1, `User ${client.id} has connected`);
     }
 
 
     async handleDisconnect(client: Socket) {
-        if (PARAM_LOGGING_LEVEL>=1)  { LogMe('WS: handleDisconnect'); }
-        if (PARAM_LOGGING_LEVEL>=1)  { LogMe(`User ${client.id} has disconnected`); }
+        LogMe(1, 'WS: handleDisconnect');
+        LogMe(1, `User ${client.id} has disconnected`);
     }
 
 
     @SubscribeMessage('ping')
     async handlePingMessage (@MessageBody() data: any, @ConnectedSocket() client: Socket) {
-        if (PARAM_LOGGING_LEVEL>=1)  { LogMe('WS: handleMessage of ping'); }
-        if (PARAM_LOGGING_LEVEL>=2)  { LogMe('#'+JSON.stringify(data['myclientdata'])+'#'); }
+        LogMe(1, 'WS: handleMessage of ping');
+        LogMe(2, '#'+JSON.stringify(data['myclientdata'])+'#');
 
         return {
             event: 'pong',
@@ -91,8 +90,8 @@ implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
 
     @SubscribeMessage('clientNotificationNewMessage')
     async handleClientNotificationNewMessage (@MessageBody() data: any, @ConnectedSocket() client: Socket) {
-        if (PARAM_LOGGING_LEVEL>=1)  { LogMe('WS: handleMessage of clientNotificationNewMessage'); }
-        if (PARAM_LOGGING_LEVEL>=2)  { LogMe('#'+JSON.stringify(data['myclientdata'])+'#'); }
+        LogMe(1, 'WS: handleMessage of clientNotificationNewMessage');
+        LogMe(2, '#'+JSON.stringify(data['myclientdata'])+'#');
 
         // Check cookie
         let senderUsername = await this.checkUserCookie(data['myclientdata']['emitterCookie']);
@@ -108,11 +107,11 @@ implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
 
         if (existingUserConnection) {
             // If connected, notify it
-            if (PARAM_LOGGING_LEVEL>=1)  { LogMe('WS: Sending new message notification to ' + data['myclientdata']['receiverUsername']); }
+            LogMe(1, 'WS: Sending new message notification to ' + data['myclientdata']['receiverUsername']);
             // Only notify the recipient of the message
             this.server.to(existingUserConnection.socketId).emit('serverNotificationNewMessage', {myserverdata: {fromUser: senderUsername}});
         } else {
-            if (PARAM_LOGGING_LEVEL>=1)  { LogMe('WS: ' + data['myclientdata']['receiverUsername'] + ' is not connected, so it will not be notified'); }
+            LogMe(1, 'WS: ' + data['myclientdata']['receiverUsername'] + ' is not connected, so it will not be notified');
         }
     }
 

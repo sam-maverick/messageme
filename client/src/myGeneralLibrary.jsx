@@ -31,13 +31,13 @@ export function LogMe(level, message) {
         if (! LogMeUsername === false) {
             usernameHeader = '['+LogMeUsername+']: ';
         }
-        console.log(usernameHeader + message);
+        console.log('(msmclient) '+usernameHeader + message);
     }
 }
 
 export function ErrorAlert(message, errorObject) {
     LogMe(1, '* * * * * * ERROR * * * * * *  ' + message);
-    if (PARAM_LOGGING_LEVEL>=1 & errorObject!=undefined) { console.log(errorObject.stack); }
+    if (errorObject!=undefined) { LogMe(1, errorObject.stack); }
     Alert.alert(
       'Error',
       message,

@@ -13,7 +13,7 @@ import { TabsComponent } from './Tabs.jsx';
 import { ApiCreateAccount } from '../network/networkApi.js';
 
 import storage from '../storage/storageApi.js';
-import { PARAM_LOGGING_LEVEL, PARAM_SERVER_API_URL } from '../parameters.js';
+import { PARAM_SERVER_API_URL } from '../parameters.js';
 
 
 
