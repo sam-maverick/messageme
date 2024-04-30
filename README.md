@@ -392,6 +392,10 @@ Finally, if you have not already, follow the steps explained in the '<u>Install 
 
 Once you have the app installed in your phone, have fun!
 
+# Acknowledgements
+
+The project that gave rise to these results received the support of a fellowship from ”la Caixa” Foundation (ID 100010434). The fellowship code is LCF/BQ/DI22/11940036. This work was also supported by FCT through the LASIGE Research Unit (UIDB/00408/2020 and UIDP/00408/2020).
+
 # License
 
 This work is licensed under the CC BY 4.0. See [LICENSE](LICENSE) for more details.
