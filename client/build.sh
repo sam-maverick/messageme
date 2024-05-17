@@ -1,4 +1,4 @@
-appname="pt.lasige.messageme"
+appname="pt.lasige.safex.messageme"
 artifactname="messageme"
 mainactivity="MainActivity"
 

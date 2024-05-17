@@ -37,7 +37,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "pt.lasige.messageme",
+      "bundleIdentifier": "pt.lasige.safex.messageme",
       "infoPlist": {
         "NSCameraUsageDescription": "This app uses the camera to let users share images in private chats.",
         "NSAppTransportSecurity": {
@@ -55,7 +55,7 @@
         "WRITE_EXTERNAL_STORAGE",
         "CAMERA_ROLL"
       ],
-      "package": "pt.lasige.messageme",
+      "package": "pt.lasige.safex.messageme",
       "versionCode": 9
     },
     "web": {
