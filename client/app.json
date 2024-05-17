@@ -57,7 +57,7 @@
         "android.permission.RECORD_AUDIO"
       ],
       "package": "pt.lasige.safex.messageme",
-      "versionCode": 10
+      "versionCode": 11
     },
     "web": {
       "favicon": "./assets/favicon.png"
