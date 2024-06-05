@@ -3,7 +3,7 @@ import React, {useState, useCallback, useEffect, useRef} from 'react';
 import { StyleSheet, Button, Text, TextInput, View, SafeAreaView, Alert } from 'react-native';
 import RNRestart from 'react-native-restart';  // Use only in PROD
 import { DevSettings } from 'react-native';  // Use only in DEV
-
+import { LogBox } from 'react-native';
 
 import Storage from 'react-native-storage';
 //import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -28,6 +28,9 @@ import { PrivateChatComponent } from './visuals/PrivateChat.jsx';
 import { ApiCheckAccount } from './network/networkApi.js';
 
 
+LogBox.ignoreLogs([
+    "Overwriting fontFamily style attribute preprocessor"
+  ]);
 
 
 
@@ -72,7 +75,10 @@ export default function App() {
                     syncInBackground: false,        
                     key: 'accountData',
                 });
-                    
+                
+                LogMe(1, 'retStorage='+JSON.stringify(retStorage));
+                // Note: when using the the bare workflow, old data may reappear. This should not happen with the APK/standalone workflow
+
                 try {
                  
                     let resApi = await ApiCheckAccount(retStorage.cookie);

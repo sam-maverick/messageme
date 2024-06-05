@@ -47,7 +47,7 @@ To make the service start automatically when you boot up your computer, run:
 systemctl enable create_ap
 ```
 
-Next, configure your computer to act as a DHCP server, for it to serve addresses within ap0's subnet. We used [dnsmasq](https://wiki.archlinux.org/title/dnsmasq). These are the main configuration options of our `/etc/dnsmasq.conf`:
+Next, configure your computer to act as a DHCP and DNS server, for it to serve addresses within ap0's subnet. We used [dnsmasq](https://wiki.archlinux.org/title/dnsmasq). These are the main configuration options of our `/etc/dnsmasq.conf`:
 
 ```
 dhcp-range=192.168.12.100,192.168.12.199,255.255.255.0,12h
@@ -398,4 +398,4 @@ The project that gave rise to these results received the support of a fellowship
 
 # License
 
-This work is licensed under the CC BY 4.0. See [LICENSE](LICENSE) for more details.
+This work is licensed under CC BY 4.0. See [LICENSE](LICENSE) for more details.
