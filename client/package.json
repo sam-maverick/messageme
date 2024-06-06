@@ -1,6 +1,6 @@
 {
   "name": "messageme-client",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "main": "./src/App.js",
   "scripts": {
     "start": "expo start",
