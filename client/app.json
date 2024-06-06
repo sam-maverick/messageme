@@ -2,6 +2,9 @@
   "expo": {
     "plugins": [
       [
+        "./plugins/android-manifest-requestLegacyExternalStorage.js"
+      ],
+      [
         "expo-image-picker",
         {
           "photosPermission": "The app accesses your photos to let you share them with your contacts in private chats."
@@ -39,7 +42,8 @@
       "supportsTablet": true,
       "bundleIdentifier": "pt.lasige.safex.messageme",
       "infoPlist": {
-        "NSCameraUsageDescription": "This app uses the camera to let users share images in private chats.",
+        "NSPhotoLibraryUsageDescription": "This app uses the library to let users share images in private chats.",
+        "NSPhotoLibraryAddUsageDescription": "This app uses the library to let users share images in private chats.",
         "NSAppTransportSecurity": {
           "NSAllowsArbitraryLoads": true
         }
@@ -51,12 +55,13 @@
         "backgroundColor": "#ffffff"
       },
       "permissions": [
-        "android.permission.CAMERA",
+        "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE",
-        "android.permission.CAMERA_ROLL"
+        "android.permission.CAMERA_ROLL",
+        "android.permission.READ_MEDIA_IMAGES"
       ],
       "package": "pt.lasige.safex.messageme",
-      "versionCode": 11
+      "versionCode": 12
     },
     "web": {
       "favicon": "./assets/favicon.png"
