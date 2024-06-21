@@ -7,8 +7,9 @@ import * as Device from 'expo-device';
 
 // Quality of the image (resampling)
 // from 0 to 1, float. 0=lowest resolution, 1=highest resolution
-// NOTE: In some devices, only 1 is supported!!!! Check: https://github.com/expo/expo/issues/19512
-// Check: https://github.com/react-native-image-picker/react-native-image-picker/blob/a5d2938cd19e1d26614bd78c89d3e02467da28a6/docs/Reference.md#options
+// NOTE: In some devices, only 1 is supported!!!! Check:
+// https://github.com/expo/expo/issues/19512
+// https://github.com/react-native-image-picker/react-native-image-picker/blob/a5d2938cd19e1d26614bd78c89d3e02467da28a6/docs/Reference.md#options
 export const PARAM_IMAGE_PICKER_QUALITY = 1;
 
 let server_host = '';
@@ -18,9 +19,9 @@ if (Device.isDevice) {
     server_host = '10.0.2.2';  // Do not change. 10.0.2.2 is used as loopback address of the emulator host by Expo Go.
 }
 
-export const PARAM_SERVER_API_URL = 'http://' + server_host + ':3000'; // Change port if needed
+export const PARAM_SERVER_API_URL = 'http://' + server_host + ':3010'; // Change port if needed
 
-export const PARAM_SERVER_WS_URL = 'ws://' + server_host + ':3001'; // Change port if needed
+export const PARAM_SERVER_WS_URL = 'ws://' + server_host + ':3011'; // Change port if needed
 
 export const PARAM_IMAGES_DIRNAME = 'chatHistoryPictures';  // You shouldn't need to change this
 

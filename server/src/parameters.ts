@@ -1,6 +1,6 @@
-export const PARAM_API_PORT = 3000;
+export const PARAM_API_PORT = 3010;
 
-export const PARAM_WEBSOCKET_PORT = 3001;
+export const PARAM_WEBSOCKET_PORT = 3011;
 
 export const PARAM_DATABASE_URL = "mongodb://127.0.0.1:27017/messagemedb";
 
