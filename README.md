@@ -2,7 +2,7 @@ Welcome! This is **Messageme**, a no-frills messaging platform for mobile device
 
 This project includes both the client and the server. The client app has been developed with [Expo Go](https://docs.expo.dev/get-started/expo-go/), based on [React Native](https://reactnative.dev/), so that you can run it on Android and iOS devices. The server has been developed with [NestJS](https://nestjs.com/) and uses a [MongoDB](https://www.mongodb.com) self-hosted database in the backend.
 
-We have tested most things on a fresh install of Ubuntu Desktop 22.04.3, but you should be able to deploy it on any platform if you follow the provided reference links. For the client, we provide a build.sh Linux shell script for convenience. The steps we suggest are meant for an isolated lab environment, meaning that it's on your responsibility to check their impact on your particular computing and networking environment.
+We have tested most things on a fresh install of Kali Linux, but you should be able to deploy it on any platform if you follow the provided reference links. For the app binaries, we provide a build.sh Linux shell script for convenience. The steps we suggest are meant for an isolated lab environment, meaning that it's on your responsibility to check their impact on your particular computing and networking environment.
 
 # Preparing the network environment
 
