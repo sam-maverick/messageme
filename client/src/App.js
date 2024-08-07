@@ -8,7 +8,7 @@ import { LogBox } from 'react-native';
 import Storage from 'react-native-storage';
 //import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import * as FileSystem from 'expo-file-system';
+//import * as FileSystem from 'expo-file-system';
 import { registerRootComponent } from 'expo';
 
 
