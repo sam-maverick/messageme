@@ -1,14 +1,28 @@
+<<<<<<< HEAD
 Welcome! This is **Messageme**, a no-frills messaging platform for mobile devices. We developed it for testing and academic purposes. It features the ability to exchange text and pictures over private chats among users. You can deploy this project on a single computer. For the client, you can use either emulators or physical devices. NOTE: If you want to run phone emulators, it is highly recommended to deploy this project on a bare metal machine, not a virtual machine.
 
 This project includes both the client and the server. The client app has been developed with [Expo Go](https://docs.expo.dev/get-started/expo-go/), based on [React Native](https://reactnative.dev/), so that you can run it on Android and iOS devices. The server has been developed with [NestJS](https://nestjs.com/) and uses a [MongoDB](https://www.mongodb.com) self-hosted database in the backend.
 
 We have tested most things on a fresh install of Kali Linux, but you should be able to deploy it on any platform if you follow the provided reference links. For the app binaries, we provide a build.sh Linux shell script for convenience. The steps we suggest are meant for an isolated lab environment, meaning that it's on your responsibility to check their impact on your particular computing and networking environment.
+=======
+Welcome! This is **Messageme**, a messaging platform for mobile devices. We developed it for testing and academic purposes. It features the ability to exchange text and pictures over private chats among users. You can deploy this project on a single computer. For the client, you can use either emulators or physical devices. NOTE: If you want to run emulators, it is highly recommended to deploy this project on a bare metal machine, not a virtual machine.
+
+This project includes both the client and the server.
+The client app has been developed with [Expo Go](https://docs.expo.dev/get-started/expo-go/), based on [React Native](https://reactnative.dev/), so that you can run it on Android and iOS devices.
+The server has been developed with [NestJS](https://nestjs.com/) and uses a [MongoDB](https://www.mongodb.com) self-hosted database in the backend.
+
+We have tested most things on a fresh install of Ubuntu Desktop 22.04.3, but you should be able to deploy it on any platform, by following the provided reference links. The steps we suggest are meant for an isolated lab environment, meaning that it's on your responsibility to check their impact on your particular computing and networking environment.
+>>>>>>> f2d05ec (Initial commit)
 
 # Preparing the network environment
 
 If you do not intend to use physical devices, then skip to next section.
 
+<<<<<<< HEAD
 You first set up your computer to act as a WiFi Access Point for the phones to connect to. In our lab, the computer is connected to the Internet via an Ethernet cable (interface eth0). We used [create_ap](https://github.com/oblique/create_ap/) in NAT mode, so that the phones can reach both the computer and the Internet without configuring any routing on the computer. Below is our template for `/etc/create_ap.conf`, which creates a hidden WiFi.
+=======
+You first set up your computer to act as a WiFi access point for the phones to connect to. In our lab, the computer is connected to the Internet via an Ethernet cable. We used [create_ap](https://github.com/oblique/create_ap/) in NAT mode, so that the phones can reach the Internet without configuring any routing on the computer. Below is our template for `/etc/create_ap.conf`, which creates a hidden WiFi.
+>>>>>>> f2d05ec (Initial commit)
 
 ```
 CHANNEL=default
@@ -30,12 +44,19 @@ FREQ_BAND=2.4
 WIFI_IFACE=wlan0
 INTERNET_IFACE=eth0
 SSID=LabWifi
+<<<<<<< HEAD
 PASSPHRASE=changeme
 ```
 
 Note that the virtual interface ap0 is created, which links to the wlan0 physical interface. Assign an IP address to ap0, within a new subnet (we used 192.168.12.1/24 in our environment).
 
 To start the Access Point, run:
+=======
+PASSPHRASE=putsomepasswordhere
+```
+
+To start the access point, run:
+>>>>>>> f2d05ec (Initial commit)
 
 ```
 systemctl start create_ap
@@ -47,6 +68,7 @@ To make the service start automatically when you boot up your computer, run:
 systemctl enable create_ap
 ```
 
+<<<<<<< HEAD
 Next, configure your computer to act as a DHCP and DNS server, for it to serve addresses within ap0's subnet. We used [dnsmasq](https://wiki.archlinux.org/title/dnsmasq). These are the main configuration options of our `/etc/dnsmasq.conf`:
 
 ```
@@ -70,6 +92,11 @@ systemctl enable dnsmasq
 *NOTE: From our experience, from looking at the [Wireshark](https://www.wireshark.org/) traces, create_ap bridges the DHCP Discover request frames received from ap0 to our eth0. If you have a DHCP server in your Ethernet network, it will offer IP addresses to the phones within the subnet range of your Ethernet. In other words, your phone will receive two DHCP Offer messages: One from the DHCP server of your computer, and one from the DHCP of your Ethernet network. Because your computer will probably reply faster, this issue will likely come unnoticed. If you run into network issues, you may want to use static IP addresses instead, or to otherwise filter the DHCP frames.*
 
 You should now be able to connect via WiFi from your phone. Once connected, check that you have Internet access and that you can ping the computer (there are many free apps to do so).
+=======
+Next, configure your computer to act as a DHCP server.  You will find plenty tutorials on the Internet on how to do so.
+
+You should now be able to connect via WiFi from your phone. Once connected, check that you have Internet access and that you can ping the computer (you can use some app to do so).
+>>>>>>> f2d05ec (Initial commit)
 
 Also, throughout this guide, remember to open any necessary ports of the firewall of your computer's OS, if applicable.
 
@@ -209,18 +236,28 @@ npm i -g @nestjs/cli
 From the `server/` folder, start the server:
 
 ```
+<<<<<<< HEAD
 npm start --reset-cache
+=======
+npm start
+>>>>>>> f2d05ec (Initial commit)
 ```
 
 You should get a `Nest application successfully started`.
 
 # Running the app
 
+<<<<<<< HEAD
 There are different ways to deploy and launch the Messageme app. Expo Go provides a shell environment to easily and quickly test features. If you want a standalone app that you can publish, then you may want to deploy a production build. Besides, you may want to either use virtual or physical devices. Choose the option(s) below that you want.
 
 The tasks below are to be performed from the `client/` folder.
 
 ### Launching the app on an Android device with Expo Go
+=======
+There are different ways to deploy and launch the Messageme app. Expo Go provides a shell environment to easily and quickly test features. If you want a standalone app, then you want to deploy a bare React Native build. Besides, you may want to either use virtual or physical devices. Choose the option(s) below that you want.
+
+### Launching the app on a physical device with Expo Go
+>>>>>>> f2d05ec (Initial commit)
 
 With Expo Go, you use the Expo Go app as a bridge to execute the app. This is likely the fastest way to get it up and running.
 
@@ -285,7 +322,11 @@ emulator @<avd_name>
 From the client/ folder, start Expo Go:
 
 ```
+<<<<<<< HEAD
 npx expo start --reset-cache
+=======
+npx expo start
+>>>>>>> f2d05ec (Initial commit)
 ```
 
 Make sure you have only one emulator running, and that no phones connected to your computer via cable. Then, press `a` for `open Android`. It will automatically install the Expo Go app, and launch your app.
@@ -294,6 +335,7 @@ For any AVDs you want to use, repeat the same steps: Make sure no other AVD is r
 
 Once you have installed the Expo Go on all your AVDs, you can then start all your AVDs at once, run the Expo Go app, launch Messageme, and play with sending and receiving messages.
 
+<<<<<<< HEAD
 ### Launching the app on an iOS emulator
 
 You should not need an Apple Developer account to use an iOS emulator, but you'll need a Mac to perform this step. The command is:
@@ -325,6 +367,11 @@ where `patchlevel` is patch, minor, or major
 ### Deploying the APK and running it on an Android device
 
 This is known as a 'production build'. Here we will deploy the app as a bare React Native app. You will need to compile your project to generate the APK file. The [Expo Go 'Create your first build' guide](https://docs.expo.dev/build/setup/) provides the steps to use the EAS cloud service for the compilation. However, we prefer to compile locally, using the [Expo Go 'Local app development' guide](https://docs.expo.dev/guides/local-app-development/). Below is a summary of the steps you need to perform.
+=======
+### Deploying the APK and running the app on a physical Android device (bare React Native)
+
+Here we will deploy the app as a bare React Native app. You will need to compile your project to generate the APK file. The [Expo Go 'Create your first build' guide](https://docs.expo.dev/build/setup/) provides the steps to use the EAS cloud service for the compilation. However, we prefer to compile locally, using the [Expo Go 'Local app development' guide](https://docs.expo.dev/guides/local-app-development/). Below is a summary of the steps you need to perform.
+>>>>>>> f2d05ec (Initial commit)
 
 We already have the Node.js, watchman, and Android Studio set up in previous steps. So now we have to install the JDK that we have downloaded from [here](https://wiki.openjdk.org/display/JDKUpdates/JDK+17u). NOTE: It does not work with Java 21.
 
@@ -346,6 +393,7 @@ npx expo-doctor
 
 It should give `Didn't find any issues with the project!`
 
+<<<<<<< HEAD
 
 
 You can use a script we provide, that manages versioning, clears previous build, and performs other helpful tasks:
@@ -359,6 +407,9 @@ where `patchlevel` is patch, minor, or major, and `buildtype` is either apk or a
 
 
 Alternatively, instead of build.sh, you can perform the commands below:
+=======
+Prepare your first build:
+>>>>>>> f2d05ec (Initial commit)
 
 ```
 npx expo prebuild --clean
@@ -366,7 +417,11 @@ npx expo prebuild --clean
 
 The `--clean` option is usefull if you make major changes (such as the target API version) and you want to make sure that old files are cleared before running the build.
 
+<<<<<<< HEAD
 Now, we have to follow steps 1 & 2 from the Expo Go 'Create your first build' guide, so:
+=======
+Now, we have to follow steps 1 & 2 from the [Expo Go 'Create your first build' guide](https://docs.expo.dev/build/setup/), so:
+>>>>>>> f2d05ec (Initial commit)
 
 Install EAS. Despite not being stated in the official guide, we needed a sudo:
 
@@ -388,6 +443,7 @@ eas build -p android --profile preview --local
 
 It should give you a `Build successful` and a message indicating where the APK artifact has been generated.
 
+<<<<<<< HEAD
 Finally, if you have not already, follow the steps explained in the '<u>Install with adb</u>' section of the [Expo Go 'Build APKs for Android Emulators and devices' guide](https://docs.expo.dev/build-reference/apk/#install-with-adb). If you get a "*signatures do not match newer version; ignoring!*" error, you probably already have your app installed from a previous build. Delete the app and repeat the APK installation process.
 
 Once you have the app installed in your phone, have fun!
@@ -399,3 +455,23 @@ The project that gave rise to these results received the support of a fellowship
 # License
 
 This work is licensed under CC BY 4.0. See [LICENSE](LICENSE) for more details.
+=======
+Finally, follow the steps explained in the '<u>Install with adb</u>' section of the [Expo Go 'Build APKs for Android Emulators and devices' guide](https://docs.expo.dev/build-reference/apk/#install-with-adb).
+
+Once you have the app installed in your phone, have fun!
+
+
+
+Alternatively, you can build & run with a single command, as explained in the 'Local app development' guide:
+
+```
+npx expo run:android
+```
+
+You can also deploy the APK on an AVD as well. According to the [Expo Go 'Build APKs for Android Emulators and devices' guide](https://docs.expo.dev/build-reference/apk/#emulator-virtual-device), the command is:
+
+```
+eas build:run -p android
+```
+
+>>>>>>> f2d05ec (Initial commit)

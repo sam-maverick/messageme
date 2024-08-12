@@ -17,6 +17,13 @@ import storage from '../storage/storageApi.js';
 
 import { ApiResetFactoryDB } from '../network/networkApi.js';
 
+<<<<<<< HEAD
+=======
+import { PARAM_LOGGING_LEVEL } from '../parameters.js';
+
+
+
+>>>>>>> f2d05ec (Initial commit)
 
 
 
@@ -27,20 +34,34 @@ export const SettingsComponent = props => {
     useEffect( () => {  // This is executed when the app is launched
         async function didMount() { // Do not change the name of this function
             // Do stuff
+<<<<<<< HEAD
             LogMe(1, 'useEffect of Settings invocation');           
+=======
+            if (PARAM_LOGGING_LEVEL>=1) {  LogMe('useEffect of Settings invocation');  }           
+>>>>>>> f2d05ec (Initial commit)
         }
         didMount();  // If we want useEffect to be asynchronous, we have to define didMount as async and call it right after
         return async function didUnmount() { // Do not change the name of this function
           // Cleanup tasks
+<<<<<<< HEAD
           LogMe(1, 'useEffect of Settings cleanup');
+=======
+          if (PARAM_LOGGING_LEVEL>=1) {  LogMe('useEffect of Settings cleanup');  }
+>>>>>>> f2d05ec (Initial commit)
         };
     }, []);  // App.js does not have props
 
 
     async function ComponentRefresh() {  // Invoked every time this screen is loaded
+<<<<<<< HEAD
         LogMe(1, 'Refreshing Settings Component');
         if (initStatus.key === 'init') {
             LogMe(1, 'Initialising Settings Component');
+=======
+        if (PARAM_LOGGING_LEVEL>=1) {  LogMe('Refreshing Settings Component');  }
+        if (initStatus.key === 'init') {
+            if (PARAM_LOGGING_LEVEL>=1) {  LogMe('Initialising Settings Component');  }
+>>>>>>> f2d05ec (Initial commit)
             initStatus.key = 'updated'; //update without rendering
             //initStatus({ key:'updated'}); //update with rendering
             // This will reach only on the first time the scren is loaded
@@ -54,7 +75,11 @@ export const SettingsComponent = props => {
 
 
     async function HandlerForLocalDataEraseFromSettings() {
+<<<<<<< HEAD
         LogMe(1, 'HandlerForLocalDataEraseFromSettings()');
+=======
+        if (PARAM_LOGGING_LEVEL>=1) {  LogMe('HandlerForLocalDataEraseFromSettings()');  }
+>>>>>>> f2d05ec (Initial commit)
         try {
             await EraseLocalData();
             if (__DEV__) {
@@ -72,7 +97,11 @@ export const SettingsComponent = props => {
 
 
     async function EraseAllServerData() {
+<<<<<<< HEAD
         LogMe(1, 'EraseAllServerData()');
+=======
+        if (PARAM_LOGGING_LEVEL>=1) {  LogMe('EraseAllServerData()');  }
+>>>>>>> f2d05ec (Initial commit)
         Alert.alert('Confirmation', 'All user data on the server side, as well as the app\'s local data, will be erased. All other client apps will have to be restarted. Are you sure you want to continue?', [
           {
             text: 'Cancel',
@@ -116,7 +145,10 @@ export const SettingsComponent = props => {
         ]);
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f2d05ec (Initial commit)
     // Initialisation
     ComponentRefresh();
     

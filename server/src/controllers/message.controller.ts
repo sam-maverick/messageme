@@ -4,6 +4,10 @@ import { v4 as uuidv4 } from 'uuid';
 import { AppService } from '../app.service';
 import UsersModel from '../middleware/database/schemas/user';
 import MessagesModel from '../middleware/database/schemas/message';
+<<<<<<< HEAD
+=======
+import { PARAM_LOGGING_LEVEL } from '../parameters';
+>>>>>>> f2d05ec (Initial commit)
 import { LogMe } from '../serverLibrary';
 
 
@@ -14,7 +18,11 @@ export class MessageController {
     @Post('/sendMessage')
     async sendMessage(@Req() req) {
 
+<<<<<<< HEAD
         LogMe(1, 'Controller: messages/sendMessage');    
+=======
+        if (PARAM_LOGGING_LEVEL>=1) {  LogMe('Controller: messages/sendMessage');  }    
+>>>>>>> f2d05ec (Initial commit)
 
         const cookie: string = req.body.cookie;
 
@@ -54,12 +62,20 @@ export class MessageController {
     @Post('/receiveMessage')
     async receiveMessage(@Req() req) {
 
+<<<<<<< HEAD
         LogMe(1, 'Controller: messages/receiveMessage');    
+=======
+        if (PARAM_LOGGING_LEVEL>=1) {  LogMe('Controller: messages/receiveMessage');  }    
+>>>>>>> f2d05ec (Initial commit)
     
         const cookie: string = req.body.cookie;
 
         const userRecipient = await UsersModel.findOne({'cookie': cookie });
+<<<<<<< HEAD
         LogMe(1, 'Controller: messages/receiveMessage: cookie checked');    
+=======
+        if (PARAM_LOGGING_LEVEL>=1) {  LogMe('Controller: messages/receiveMessage: cookie checked');  }    
+>>>>>>> f2d05ec (Initial commit)
 
         if(userRecipient) {
 
@@ -67,12 +83,20 @@ export class MessageController {
             // ToDo: Order messages by date to make sure they are delivered orderly
             // ToDo: Make sure the recipient has received the result of this query before deleting the message
 
+<<<<<<< HEAD
             LogMe(1, 'Controller: messages/receiveMessage: message retrieval from DB done');    
+=======
+            if (PARAM_LOGGING_LEVEL>=1) {  LogMe('Controller: messages/receiveMessage: message retrieval from DB done');  }    
+>>>>>>> f2d05ec (Initial commit)
 
             if(messageInQueue) {
 
                 const deletemessageInQueue = await MessagesModel.deleteOne({'_id': messageInQueue._id });
+<<<<<<< HEAD
                 LogMe(1, 'Controller: messages/receiveMessage: message deletion done');    
+=======
+                if (PARAM_LOGGING_LEVEL>=1) {  LogMe('Controller: messages/receiveMessage: message deletion done');  }    
+>>>>>>> f2d05ec (Initial commit)
 
                 return {
                     isSuccessful: true,

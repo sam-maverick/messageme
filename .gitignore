@@ -1,19 +1,17 @@
 # Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
-<<<<<<< HEAD
-artifacts/
-
-=======
->>>>>>> f2d05ec (Initial commit)
 # dependencies
-node_modules/
+client/node_modules/
+server/node_modules/
 
 # Expo
-.expo/
-dist/
-web-build/
+client/.expo/
+client/dist/
+client/web-build/
+server/.expo/
+server/dist/
+server/web-build/
 
-scratchpaper/
 
 # Native
 *.orig.*
@@ -23,24 +21,21 @@ scratchpaper/
 *.key
 *.mobileprovision
 
-<<<<<<< HEAD
-# Artifact files
-*.apk
-*.aab
-*.ipa
-
-# Local git used by EAS compiler. Rename .git to .git2 before initial commit, then rename .git2 to .git and commit again
-.git2
-
-=======
->>>>>>> f2d05ec (Initial commit)
 # Metro
 .metro-health-check*
+client/.metro-health-check*
+server/.metro-health-check*
 
 # debug
 npm-debug.*
 yarn-debug.*
 yarn-error.*
+client/npm-debug.*
+client/yarn-debug.*
+client/yarn-error.*
+server/npm-debug.*
+server/yarn-debug.*
+server/yarn-error.*
 
 # macOS
 .DS_Store
@@ -48,17 +43,21 @@ yarn-error.*
 
 # local env files
 .env*.local
+client/.env*.local
+server/.env*.local
 
 # typescript
 *.tsbuildinfo
 
 # Ignore Gradle project-specific cache directory
-.gradle
+client/.gradle
+server/.gradle
 
 # Ignore Gradle build output directory
-build
+client/build
+server/build
 
 # npx expo-doctor  
 # This project has native project folders but is also configured to use Prebuild. EAS Build will not sync your native configuration if the ios or android folders are present. Add these folders to your .gitignore file if you intend to use prebuild (aka "managed" workflow).
-android/
-ios/
+client/android/
+client/ios/

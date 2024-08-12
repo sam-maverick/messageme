@@ -2,6 +2,7 @@
   "expo": {
     "plugins": [
       [
+<<<<<<< HEAD
         "./plugins/android-manifest-requestLegacyExternalStorage.js"
       ],
       [
@@ -27,19 +28,49 @@
     "name": "messageme",
     "slug": "messageme",
     "version": "1.5.21",
+=======
+          "expo-image-picker",
+          {
+              "photosPermission": "The app accesses your photos to let you share them with your contacts in private chats."
+          }
+      ],
+      [
+          "expo-build-properties",    
+          {
+          "android": {
+              "compileSdkVersion": 33,
+              "targetSdkVersion": 34,
+              "usesCleartextTraffic": true,
+          },
+          "ios": {
+              "deploymentTarget": "16.0"
+          },
+        }          
+          
+      ],
+    ],
+    "name": "messageme-client",
+    "slug": "messageme-client",
+    "version": "1.0.0",
+>>>>>>> f2d05ec (Initial commit)
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
+<<<<<<< HEAD
       "backgroundColor": "#ffffff"
+=======
+      "backgroundColor": "#ffffff",
+>>>>>>> f2d05ec (Initial commit)
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
       "supportsTablet": true,
+<<<<<<< HEAD
       "bundleIdentifier": "pt.lasige.safex.messageme",
       "infoPlist": {
         "NSPhotoLibraryUsageDescription": "This app uses the library to let users share images in private chats.",
@@ -47,6 +78,11 @@
         "NSAppTransportSecurity": {
           "NSAllowsArbitraryLoads": true
         }
+=======
+      "bundleIdentifier": "pt.lasige.messageme",
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to let users share images in private chats."
+>>>>>>> f2d05ec (Initial commit)
       }
     },
     "android": {
@@ -55,6 +91,7 @@
         "backgroundColor": "#ffffff"
       },
       "permissions": [
+<<<<<<< HEAD
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE",
         "android.permission.CAMERA_ROLL",
@@ -69,6 +106,20 @@
     "extra": {
       "eas": {
         "projectId": "2154cddb-92fa-4b2a-9f2e-4310fae6e9d7"
+=======
+        "CAMERA",
+        "WRITE_EXTERNAL_STORAGE",
+        "CAMERA_ROLL",
+      ],
+      "package": "pt.lasige.messageme",
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f4e9da43-0172-489b-974a-05e386615eb8",
+>>>>>>> f2d05ec (Initial commit)
       }
     }
   }

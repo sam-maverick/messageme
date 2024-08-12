@@ -4,6 +4,10 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { AppService } from '../app.service';
 import UsersModel from '../middleware/database/schemas/user';
+<<<<<<< HEAD
+=======
+import { PARAM_LOGGING_LEVEL } from '../parameters';
+>>>>>>> f2d05ec (Initial commit)
 import { LogMe } from '../serverLibrary';
 
 
@@ -15,7 +19,11 @@ export class UserController {
     @Post('/getAccountsList')
     async getAccountsList(@Req() req) {
 
+<<<<<<< HEAD
         LogMe(1, 'Controller: accounts/getAccountsList');
+=======
+        if (PARAM_LOGGING_LEVEL>=1) {  LogMe('Controller: accounts/getAccountsList');  }
+>>>>>>> f2d05ec (Initial commit)
 
         const cookie = req.body.cookie;
 
@@ -44,7 +52,11 @@ export class UserController {
     @Post('/checkAccount')
     async checkAccount(@Req() req) {
 
+<<<<<<< HEAD
         LogMe(1, 'Controller: accounts/checkAccount');
+=======
+        if (PARAM_LOGGING_LEVEL>=1) {  LogMe('Controller: accounts/checkAccount');  }
+>>>>>>> f2d05ec (Initial commit)
 
         const cookie: string = req.body.cookie;
 
@@ -71,7 +83,11 @@ export class UserController {
     @Post('/createAccount')
     async createAccount(@Req() req) {
 
+<<<<<<< HEAD
         LogMe(1, 'Controller: accounts/createAccount');
+=======
+        if (PARAM_LOGGING_LEVEL>=1) {  LogMe('Controller: accounts/createAccount');  }
+>>>>>>> f2d05ec (Initial commit)
     
         const username: string = req.body.username;
 

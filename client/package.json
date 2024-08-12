@@ -1,7 +1,12 @@
 {
   "name": "messageme-client",
+<<<<<<< HEAD
   "version": "1.5.0",
   "main": "./src/App.js",
+=======
+  "version": "1.0.0",
+  "main": "node_modules/expo/AppEntry.js",
+>>>>>>> f2d05ec (Initial commit)
   "scripts": {
     "start": "expo start",
     "android": "expo run:android",
@@ -9,29 +14,43 @@
     "web": "expo start --web"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-brands-svg-icons": "^6.5.1",
     "@fortawesome/free-regular-svg-icons": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-native-fontawesome": "^0.3.0",
+=======
+>>>>>>> f2d05ec (Initial commit)
     "@react-native-async-storage/async-storage": "1.18.2",
     "@types/react": "~18.2.46",
     "expo": "^49.0.21",
     "expo-build-properties": "~0.8.3",
     "expo-device": "~5.4.0",
+<<<<<<< HEAD
     "expo-file-system": "15.4.5",
+=======
+    "expo-file-system": "~15.4.5",
+>>>>>>> f2d05ec (Initial commit)
     "expo-image-picker": "~14.3.2",
     "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
     "expo-system-ui": "~2.4.0",
     "react": "18.2.0",
+<<<<<<< HEAD
     "react-native": "0.72.10",
+=======
+    "react-native": "0.72.6",
+>>>>>>> f2d05ec (Initial commit)
     "react-native-elements": "^3.4.3",
     "react-native-gifted-chat": "^2.4.0",
     "react-native-restart": "^0.0.27",
     "react-native-safe-area-context": "4.6.3",
     "react-native-storage": "^1.0.1",
+<<<<<<< HEAD
     "react-native-svg": "^15.1.0",
+=======
+>>>>>>> f2d05ec (Initial commit)
     "react-native-uuid": "^2.0.1",
     "react-native-vector-icons": "^10.0.3",
     "socket.io-client": "^4.7.3",

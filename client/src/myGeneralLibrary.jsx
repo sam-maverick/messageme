@@ -18,13 +18,18 @@ import storage from './storage/storageApi.js';
 
 
 let LogMeUsername = false;
+<<<<<<< HEAD
 const startDate = Date.now();
+=======
+
+>>>>>>> f2d05ec (Initial commit)
 
 
 export function UpdateLogMeUsername (theusername) {
     LogMeUsername = theusername;
 }
 
+<<<<<<< HEAD
 export function LogSys(libname, level, message) {
     LogMe (level, libname+' '+message);
 }
@@ -63,6 +68,21 @@ export const AsyncAlert = async (message) => new Promise((resolve) => {
 export function ErrorAlert(message, errorObject) {
     LogMe(1, '* * * * * * ERROR * * * * * *  ' + message);
     if (errorObject!=undefined) { LogMe(1, errorObject.stack); }
+=======
+
+export function LogMe(message) {
+    let usernameHeader = '';
+    if (! LogMeUsername === false) {
+        usernameHeader = '['+LogMeUsername+']: ';
+    }
+    console.log(usernameHeader + message);
+}
+
+
+export function ErrorAlert(message, errorObject) {
+    if (PARAM_LOGGING_LEVEL>=1) { LogMe('* * * * * * ERROR * * * * * *  ' + message); }
+    if (PARAM_LOGGING_LEVEL>=1 & errorObject!=undefined) { console.log(errorObject.stack); }
+>>>>>>> f2d05ec (Initial commit)
     Alert.alert(
       'Error',
       message,
@@ -74,7 +94,11 @@ export function ErrorAlert(message, errorObject) {
 }
 
 export function InfoMessage(title, message) {
+<<<<<<< HEAD
     LogMe(2, 'INFO provided to the user: ' + title + ': ' + message);
+=======
+    if (PARAM_LOGGING_LEVEL>=2) {  LogMe('INFO provided to the user: ' + title + ': ' + message);  }
+>>>>>>> f2d05ec (Initial commit)
     Alert.alert(
       title,
       message,
@@ -86,7 +110,11 @@ export function InfoMessage(title, message) {
 }
 
 export async function InitialisationActions() {
+<<<<<<< HEAD
     LogMe(1, 'InitialisationActions()');
+=======
+    if (PARAM_LOGGING_LEVEL>=1) {  LogMe('InitialisationActions()'); }
+>>>>>>> f2d05ec (Initial commit)
 
     LogMeUsername = false;
 
@@ -102,6 +130,7 @@ export async function InitialisationActions() {
     }
 }
 
+<<<<<<< HEAD
 export function FromTimeSpanToHumanReadableMs(lapseMs) {
     const unitspart = Math.floor(lapseMs/1000);
     const decimalpart = lapseMs - unitspart*1000;
@@ -112,13 +141,24 @@ export function FromTimeSpanToHumanReadableMs(lapseMs) {
 
 export async function  EraseLocalData() {
     LogMe(1, 'EraseLocalData()');
+=======
+
+
+export async function  EraseLocalData() {
+    if (PARAM_LOGGING_LEVEL>=1) {  LogMe('EraseLocalData()');  }
+>>>>>>> f2d05ec (Initial commit)
     // delete images folder
     try {
         await FileSystem.deleteAsync(FileSystem.documentDirectory + PARAM_IMAGES_DIRNAME, {idempotent: true})  // Because idempotent is set to true, it does not throw error if directory does not exist
         // Also delete key-value pairs from storage
         //await AsyncStorage.clear();
+<<<<<<< HEAD
         await storage.clearMap();
         await storage.clearAll();  // Undocumented function but necessary, otherwise old data reappears
+=======
+        storage.clearMap();
+        storage.clearAll();  // Undocumented function but necessary, otherwise old data reappears
+>>>>>>> f2d05ec (Initial commit)
         await InitialisationActions();
     }
     catch(error) {
