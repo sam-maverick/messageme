@@ -13,11 +13,7 @@ import { TabsComponent } from './Tabs.jsx';
 import { ApiCreateAccount } from '../network/networkApi.js';
 
 import storage from '../storage/storageApi.js';
-<<<<<<< HEAD
 import { PARAM_SERVER_API_URL } from '../parameters.js';
-=======
-import { PARAM_LOGGING_LEVEL } from '../parameters.js';
->>>>>>> f2d05ec (Initial commit)
 
 
 
@@ -30,34 +26,20 @@ export const RegisterComponent = props => {
     useEffect( () => {  // This is executed when the app is launched
         async function didMount() { // Do not change the name of this function
             // Do stuff
-<<<<<<< HEAD
             LogMe(1, 'useEffect of Register invocation');           
-=======
-            if (PARAM_LOGGING_LEVEL>=1) {  LogMe('useEffect of Register invocation');  }           
->>>>>>> f2d05ec (Initial commit)
         }
         didMount();  // If we want useEffect to be asynchronous, we have to define didMount as async and call it right after
         return async function didUnmount() { // Do not change the name of this function
           // Cleanup tasks
-<<<<<<< HEAD
           LogMe(1, 'useEffect of Register cleanup');
-=======
-          if (PARAM_LOGGING_LEVEL>=1) {  LogMe('useEffect of Register cleanup');  }
->>>>>>> f2d05ec (Initial commit)
         };
     }, []);  // App.js does not have props
 
 
     async function ComponentRefresh() {  // Invoked every time this screen is loaded
-<<<<<<< HEAD
         LogMe(1, 'Refreshing Register Component');
         if (initStatus.key === 'init') {
             LogMe(1, 'Initialising Register Component');
-=======
-        if (PARAM_LOGGING_LEVEL>=1) {  LogMe('Refreshing Register Component');  }
-        if (initStatus.key === 'init') {
-            if (PARAM_LOGGING_LEVEL>=1) {  LogMe('Initialising Register Component');  }
->>>>>>> f2d05ec (Initial commit)
             initStatus.key = 'updated'; //update without rendering
             //initStatus({ key:'updated'}); //update with rendering
             // This will reach only on the first time the scren is loaded
@@ -79,11 +61,7 @@ export const RegisterComponent = props => {
                 ErrorAlert(resApi.resultMessage);  // Server-side error
             } else {
                 try {
-<<<<<<< HEAD
                     await storage.save({
-=======
-                    storage.save({
->>>>>>> f2d05ec (Initial commit)
                         key: 'accountData', // Note: Do not use underscore("_") in key!
                         data: {
                             'username': username,
@@ -99,11 +77,7 @@ export const RegisterComponent = props => {
             }
         } catch(error) {
             //console.error(error);
-<<<<<<< HEAD
             ErrorAlert(error.message + '(' + PARAM_SERVER_API_URL + ')', error);  // Network error
-=======
-            ErrorAlert(error.message, error);  // Network error
->>>>>>> f2d05ec (Initial commit)
         }
     }    
 

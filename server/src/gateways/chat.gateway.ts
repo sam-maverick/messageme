@@ -1,10 +1,6 @@
 import { Server, Socket } from 'socket.io';
 import { OnGatewayConnection, OnGatewayDisconnect, OnGatewayInit, SubscribeMessage, WebSocketGateway, WebSocketServer, MessageBody, ConnectedSocket, WsResponse } from '@nestjs/websockets';
 
-<<<<<<< HEAD
-=======
-import { PARAM_LOGGING_LEVEL } from '../parameters';
->>>>>>> f2d05ec (Initial commit)
 import { PARAM_WEBSOCKET_PORT } from '../parameters';
 import { LogMe } from '../serverLibrary';
 import UsersModel from '../middleware/database/schemas/user';
@@ -29,11 +25,7 @@ implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
     private connectedUsers: { socketId: string; username: string }[] = [];
 
     afterInit() {
-<<<<<<< HEAD
       LogMe(1, 'WS: Websocket server is initialized');    
-=======
-      if (PARAM_LOGGING_LEVEL>=1)  { LogMe('WS: Websocket server is initialized'); }    
->>>>>>> f2d05ec (Initial commit)
     }
   
 
@@ -44,21 +36,13 @@ implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
         if (requesteruser) {
             return requesteruser.username;
         } else {
-<<<<<<< HEAD
             LogMe(1, 'checkUserCookie(): This cookie does not exist: ' + somecookie);   
-=======
-            if (PARAM_LOGGING_LEVEL>=1) { LogMe('checkUserCookie(): This cookie does not exist: ' + somecookie);  }   
->>>>>>> f2d05ec (Initial commit)
             return false;
         }    
     }  
 
     async handleConnection(client: Socket) {
-<<<<<<< HEAD
         LogMe(1, 'WS: handleConnection');
-=======
-        if (PARAM_LOGGING_LEVEL>=1) { LogMe('WS: handleConnection');  }
->>>>>>> f2d05ec (Initial commit)
         const receivedCookie = client.handshake.auth.mycookie;
         const clientSocketId = client.id;
 
@@ -82,34 +66,20 @@ implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
             this.connectedUsers?.push( {socketId: clientSocketId, username: identifiedUsername,} );
         }
 
-<<<<<<< HEAD
         LogMe(1, `User ${client.id} has connected`);
-=======
-        if (PARAM_LOGGING_LEVEL>=1)  { LogMe(`User ${client.id} has connected`); }
->>>>>>> f2d05ec (Initial commit)
     }
 
 
     async handleDisconnect(client: Socket) {
-<<<<<<< HEAD
         LogMe(1, 'WS: handleDisconnect');
         LogMe(1, `User ${client.id} has disconnected`);
-=======
-        if (PARAM_LOGGING_LEVEL>=1)  { LogMe('WS: handleDisconnect'); }
-        if (PARAM_LOGGING_LEVEL>=1)  { LogMe(`User ${client.id} has disconnected`); }
->>>>>>> f2d05ec (Initial commit)
     }
 
 
     @SubscribeMessage('ping')
     async handlePingMessage (@MessageBody() data: any, @ConnectedSocket() client: Socket) {
-<<<<<<< HEAD
         LogMe(1, 'WS: handleMessage of ping');
         LogMe(2, '#'+JSON.stringify(data['myclientdata'])+'#');
-=======
-        if (PARAM_LOGGING_LEVEL>=1)  { LogMe('WS: handleMessage of ping'); }
-        if (PARAM_LOGGING_LEVEL>=2)  { LogMe('#'+JSON.stringify(data['myclientdata'])+'#'); }
->>>>>>> f2d05ec (Initial commit)
 
         return {
             event: 'pong',
@@ -120,13 +90,8 @@ implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
 
     @SubscribeMessage('clientNotificationNewMessage')
     async handleClientNotificationNewMessage (@MessageBody() data: any, @ConnectedSocket() client: Socket) {
-<<<<<<< HEAD
         LogMe(1, 'WS: handleMessage of clientNotificationNewMessage');
         LogMe(2, '#'+JSON.stringify(data['myclientdata'])+'#');
-=======
-        if (PARAM_LOGGING_LEVEL>=1)  { LogMe('WS: handleMessage of clientNotificationNewMessage'); }
-        if (PARAM_LOGGING_LEVEL>=2)  { LogMe('#'+JSON.stringify(data['myclientdata'])+'#'); }
->>>>>>> f2d05ec (Initial commit)
 
         // Check cookie
         let senderUsername = await this.checkUserCookie(data['myclientdata']['emitterCookie']);
@@ -142,19 +107,11 @@ implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
 
         if (existingUserConnection) {
             // If connected, notify it
-<<<<<<< HEAD
             LogMe(1, 'WS: Sending new message notification to ' + data['myclientdata']['receiverUsername']);
             // Only notify the recipient of the message
             this.server.to(existingUserConnection.socketId).emit('serverNotificationNewMessage', {myserverdata: {fromUser: senderUsername}});
         } else {
             LogMe(1, 'WS: ' + data['myclientdata']['receiverUsername'] + ' is not connected, so it will not be notified');
-=======
-            if (PARAM_LOGGING_LEVEL>=1)  { LogMe('WS: Sending new message notification to ' + data['myclientdata']['receiverUsername']); }
-            // Only notify the recipient of the message
-            this.server.to(existingUserConnection.socketId).emit('serverNotificationNewMessage', {myserverdata: {fromUser: senderUsername}});
-        } else {
-            if (PARAM_LOGGING_LEVEL>=1)  { LogMe('WS: ' + data['myclientdata']['receiverUsername'] + ' is not connected, so it will not be notified'); }
->>>>>>> f2d05ec (Initial commit)
         }
     }
 

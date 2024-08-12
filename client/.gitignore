@@ -1,10 +1,7 @@
 # Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
-<<<<<<< HEAD
 artifacts/
 
-=======
->>>>>>> f2d05ec (Initial commit)
 # dependencies
 node_modules/
 
@@ -23,7 +20,6 @@ scratchpaper/
 *.key
 *.mobileprovision
 
-<<<<<<< HEAD
 # Artifact files
 *.apk
 *.aab
@@ -32,8 +28,6 @@ scratchpaper/
 # Local git used by EAS compiler. Rename .git to .git2 before initial commit, then rename .git2 to .git and commit again
 .git2
 
-=======
->>>>>>> f2d05ec (Initial commit)
 # Metro
 .metro-health-check*
 
