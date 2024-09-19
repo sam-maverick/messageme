@@ -44,9 +44,9 @@ export function LogMe(level, message) {
     }
 }
 
-export const AsyncAlert = async (message) => new Promise((resolve) => {
+export const AsyncAlert = async (title, message) => new Promise((resolve) => {
     Alert.alert(
-      '',
+      title,
       message,
       [
         {
@@ -60,6 +60,10 @@ export const AsyncAlert = async (message) => new Promise((resolve) => {
     );
 });
 
+export const AsyncErrorAlert = async (message, errorObject) => new Promise((resolve) => {
+  LogMe(1, '* * * * * * ERROR * * * * * *  ' + message);
+  if (errorObject!=undefined) { LogMe(1, errorObject.stack); }
+  
 export function ErrorAlert(message, errorObject) {
     LogMe(1, '* * * * * * ERROR * * * * * *  ' + message);
     if (errorObject!=undefined) { LogMe(1, errorObject.stack); }
