@@ -5,7 +5,6 @@ import * as Device from 'expo-device';
 import RNRestart from 'react-native-restart';  // Use only in PROD
 import { DevSettings} from 'react-native';  // Use only in DEV
 
-
 import { styles } from './myVisualsLibrary.jsx';
 import { EraseLocalData, ErrorAlert, LogMe } from '../myGeneralLibrary.jsx';
 import { TabsComponent } from './Tabs.jsx';
