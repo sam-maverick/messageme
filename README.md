@@ -1,7 +1,7 @@
 
 
-| ![user1 screenshot](user1_screenshot.jpg) | ![user2 screenshot](user2_screenshot.jpg) |
-| :---------------------------------------: | :---------------------------------------: |
+| <img src="user1_screenshot.jpg" alt="user1 screenshot" width="270" height="600" /> | <img src="user2_screenshot.jpg" alt="user2 screenshot" width="277" height="600" /> |
+| :----------------------------------------------------------: | :----------------------------------------------------------: |
 
 
 
