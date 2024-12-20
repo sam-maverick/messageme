@@ -5,8 +5,6 @@
 
  
 
-
-
 Welcome! This is **Messageme**, a no-frills messaging platform for mobile devices. We developed it for testing and academic purposes. It features the ability to exchange text and pictures over private chats among users. You can deploy this project on a single computer. For the client, you can use either emulators or physical devices. NOTE: If you want to run phone emulators, it is highly recommended to deploy this project on a bare metal machine, not a virtual machine.
 
 This project includes both the client and the server. The client app has been developed with [Expo Go](https://docs.expo.dev/get-started/expo-go/), based on [React Native](https://reactnative.dev/), so that you can run it on Android and iOS devices. The server has been developed with [NestJS](https://nestjs.com/) and uses a [MongoDB](https://www.mongodb.com) self-hosted database in the backend.
