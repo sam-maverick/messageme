@@ -1,9 +1,9 @@
 
 
-| <img src="user1_screenshot.jpg" alt="user1 screenshot" width="270" height="600" /> | <img src="user2_screenshot.jpg" alt="user2 screenshot" width="277" height="600" /> |
-| :----------------------------------------------------------: | :----------------------------------------------------------: |
+| ![user1 screenshot](user1_screenshot.jpg) | ![user2 screenshot](user2_screenshot.jpg) |
+| :---------------------------------------: | :---------------------------------------: |
 
-
+ 
 
 Welcome! This is **Messageme**, a no-frills messaging platform for mobile devices. We developed it for testing and academic purposes. It features the ability to exchange text and pictures over private chats among users. You can deploy this project on a single computer. For the client, you can use either emulators or physical devices. NOTE: If you want to run phone emulators, it is highly recommended to deploy this project on a bare metal machine, not a virtual machine.
 
