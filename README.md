@@ -87,6 +87,7 @@ Follow the steps to [install Expo](https://docs.expo.dev/get-started/installatio
 For the **Node.js** installation, we used the [installation script](https://github.com/nodesource/distributions#ubuntu-versions):
 
 ```
+sudo apt-get install curl
 curl -fsSL https://deb.nodesource.com/setup_21.x | sudo -E bash - &&\
 sudo apt-get install -y nodejs
 ```
@@ -113,7 +114,7 @@ git --version
 
 In our environment, we have `git version 2.34.1`
 
-For **watchman**, install curl with
+For **watchman**, if not yet installed, first install curl with
 
 ```
 sudo apt-get install curl 
