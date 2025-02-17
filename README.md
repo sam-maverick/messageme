@@ -9,19 +9,33 @@ Welcome! This is **Messageme**, a no-frills messaging platform for mobile device
 
 This project includes both the client and the server. The client app has been developed with [Expo Go](https://docs.expo.dev/get-started/expo-go/), based on [React Native](https://reactnative.dev/), so that you can run it on Android and iOS devices. The server has been developed with [NestJS](https://nestjs.com/) and uses a [MongoDB](https://www.mongodb.com) self-hosted database in the backend.
 
-We have tested most things on a fresh install of Kali Linux, but you should be able to deploy it on any platform if you follow the provided reference links. For the app binaries, we provide a build.sh Linux shell script for convenience. The steps we suggest are meant for an isolated lab environment, meaning that it's on your responsibility to check their impact on your particular computing and networking environment.
+We have tested most things on Ubuntu 24.04. The steps we suggest are meant for an isolated lab environment, meaning that it's on your responsibility to check their impact on your particular computing and networking environment.
 
 # Preparing the network environment
 
 If you do not intend to use physical devices, then skip to next section.
 
-You first set up your computer to act as a WiFi Access Point for the phones to connect to. In our lab, the computer is connected to the Internet via an Ethernet cable (interface eth0). We used [create_ap](https://github.com/oblique/create_ap/) in NAT mode, so that the phones can reach both the computer and the Internet without configuring any routing on the computer. Below is our template for `/etc/create_ap.conf`, which creates a hidden WiFi.
+You first set up your computer to act as a WiFi Access Point for the phones to connect to. In our lab, the computer is connected to the Internet via an Ethernet cable. We used [create_ap](https://github.com/oblique/create_ap/) in NAT mode, so that the phones can reach both the computer and the Internet without configuring any routing on the computer. Install ifconfig (`sudo apt install ifconfig`) and use the command `ifconfig` to get the interface names.
+
+The installation commands are:
+
+```
+apt install hostapd
+git clone https://github.com/oblique/create_ap
+cd create_ap
+make install
+```
+
+Below is our `/etc/create_ap.conf`, which creates a hidden WiFi access point. 
 
 ```
 CHANNEL=default
 
 WPA_VERSION=2
-ETC_HOSTS=1
+
+ETC_HOSTS=0
+NO_DNS=1
+NO_DNSMASQ=0
 
 HIDDEN=1
 MAC_FILTER=0
@@ -40,9 +54,9 @@ SSID=LabWifi
 PASSPHRASE=changeme
 ```
 
-Note that the virtual interface ap0 is created, which links to the wlan0 physical interface. Assign an IP address to ap0, within a new subnet (we used 192.168.12.1/24 in our environment).
+*NOTE: From our experience, by looking at the [Wireshark](https://www.wireshark.org/) traces, create_ap intercepts DNS requests and uses /etc/resolv.conf to forward those requests to external DNS servers. This is not shown in netstat; we suppose that create_ap intercepts the traffic to the virtual interface at the low level. This is also undocumented. To avoid this behavior, use the suggested ETC_HOSTS, NO_DNS and NO_DNSMASQ parameters. With those parameters configured as we suggest, DNS requests are captured by the dnsmasq service.* 
 
-To start the Access Point, run:
+To start the access point, run:
 
 ```
 systemctl start create_ap
@@ -54,13 +68,60 @@ To make the service start automatically when you boot up your computer, run:
 systemctl enable create_ap
 ```
 
-Next, configure your computer to act as a DHCP and DNS server, for it to serve addresses within ap0's subnet. We used [dnsmasq](https://wiki.archlinux.org/title/dnsmasq). These are the main configuration options of our `/etc/dnsmasq.conf`:
+Note that, in some systems, a virtual interface like 'ap0' is created, which links to the wlan0 physical interface; whereas in other systems the access point is mapped directly to the physical interface (e.g., 'wlp0s20f3'). Using your access point interface name (ap0, wlp0s20f3, or whatever you have), assign it an IP address:
+
+```
+ifconfig ap0 192.168.12.1
+ifconfig ap0 netmask 255.255.255.0
+```
+
+
+
+Next, configure your computer to act as a DHCP and DNS server, for it to serve addresses within ap0's subnet. We use [dnsmasq](https://wiki.archlinux.org/title/dnsmasq).
+
+First, make sure that your `/etc/resolv.conf` only contains a loopback address as for nameserver (i.e., no external DNS servers).
+
+These are the installation commands:
+
+```
+systemctl start systemd-resolved.service
+systemctl enable systemd-resolved.service
+sudo apt install dnsmasq
+```
+
+These are the main configuration options of our `/etc/dnsmasq.conf`:
 
 ```
 dhcp-range=192.168.12.100,192.168.12.199,255.255.255.0,12h
 bind-interfaces
+# It is very important that you specify the interface to listen to, 
+# so that you avoid network issues on your other interfaces (e.g., 
+# if your eth0 interface is connected to your campus network, you
+# will not want to serve IP addresses from your DHCP there)
 interface=ap0
+# Add as many server entries as DNS resolvers you may want to use
+# You may use your corporate DNS servers if you want
+server=8.8.8.8
+### Leave the rest of the options unchanged!
 ```
+
+Then,
+
+```
+systemctl restart NetworkManager.service
+```
+
+Add the entry below to your `/etc/hosts`. NOTE: For the certificate pinning to work in iOS, you'll need to use a standard TLD, as per TrustKit restrictions.
+
+```
+# Use 192.168.12.1 when running on network; 10.0.2.2 when running on emulator
+# Run `systemctl dnsmasq restart` to apply changes
+192.168.12.1    ppserver-gen.localnetwork.org
+```
+
+Note that "gen" must correspond to the `PP_PLATFORM_NICKNAME` parameter in `ppclient/src/parameters.js`
+
+*NOTE: From our experience, by looking at the [Wireshark](https://www.wireshark.org/) traces, create_ap bridges the DHCP Discover request frames received from ap0 to our eth0. If you have a DHCP server in your Ethernet network, it will offer IP addresses to the phones within the subnet range of your Ethernet. In other words, your phone will receive two DHCP Offer messages: One from the DHCP server of your computer, and one from the DHCP of your Ethernet network. Because your computer will probably reply faster, this issue will likely come unnoticed. If you run into network issues, you may want to use static IP addresses instead, or to otherwise filter the DHCP frames.*
 
 To start the DHCP server, run:
 
@@ -68,17 +129,19 @@ To start the DHCP server, run:
 systemctl start dnsmasq
 ```
 
-To make the service start automatically when you boot up your computer, run:
+**IMPORTANT**: You need to run `systemctl restart dnsmasq` whenever you make changes to `/etc/hosts` and want to apply the changes.
+
+Note that dnsmasq must start after create_ap since its configuration references a network interface created after create_ap is started. To make the service start automatically when you boot up your computer, run:
 
 ```
 systemctl enable dnsmasq
 ```
 
-*NOTE: From our experience, from looking at the [Wireshark](https://www.wireshark.org/) traces, create_ap bridges the DHCP Discover request frames received from ap0 to our eth0. If you have a DHCP server in your Ethernet network, it will offer IP addresses to the phones within the subnet range of your Ethernet. In other words, your phone will receive two DHCP Offer messages: One from the DHCP server of your computer, and one from the DHCP of your Ethernet network. Because your computer will probably reply faster, this issue will likely come unnoticed. If you run into network issues, you may want to use static IP addresses instead, or to otherwise filter the DHCP frames.*
+
 
 You should now be able to connect via WiFi from your phone. Once connected, check that you have Internet access and that you can ping the computer (there are many free apps to do so).
 
-Also, throughout this guide, remember to open any necessary ports of the firewall of your computer's OS, if applicable.
+Also, throughout this guide, remember to open any necessary ports of the firewall of your computer's OS, if necessary.
 
 # Installing the Expo Go development environment
 
@@ -112,8 +175,6 @@ Check:
 git --version
 ```
 
-In our environment, we have `git version 2.34.1`
-
 For **watchman**, if not yet installed, first install curl with
 
 ```
@@ -126,15 +187,13 @@ Then install [brew](https://brew.sh/) with
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-<u>REMINDER</u>: Don't forget to follow the Next Steps that are indicated at the end of the output of the brew installation.
+<u>REMINDER</u>: Don't forget to follow the **Next Steps** that are indicated at the end of the output of the brew installation.
 
 Check:
 
 ```
 brew -v
 ```
-
-In our environment, we have `Homebrew 4.2.4`
 
 Finally, install watchman with
 
@@ -177,7 +236,7 @@ Edit `client/src/parameters.js` and `server/src/parameters.ts` according to your
 Download the [Community Server](https://www.mongodb.com/try/download/community) and install it:
 
 ```
-sudo dpkg -i mongodb-org-server_7.0.5_amd64.deb
+sudo dpkg -i mongodb-org-server_x.y.z_amd64.deb
 ```
 
 Check:
@@ -198,12 +257,6 @@ Start the service:
 sudo systemctl start mongod
 ```
 
-Check the service:
-
-```
-sudo systemctl status mongod
-```
-
 Optionally, install the [MongoDB Compass](https://www.mongodb.com/products/tools/compass). It is a GUI for this database.
 
 # Starting the server
@@ -211,7 +264,7 @@ Optionally, install the [MongoDB Compass](https://www.mongodb.com/products/tools
 Install NestJS CLI tools, as explained in the [docs](https://docs.nestjs.com/):
 
 ```
-npm i -g @nestjs/cli
+sudo npm i -g @nestjs/cli
 ```
 
 From the `server/` folder, start the server:
